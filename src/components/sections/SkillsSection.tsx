@@ -12,15 +12,18 @@ import {
 import { SectionWrapper } from '../layout/SectionWrapper';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Badge } from '../ui/Badge';
+import { ScrollReveal } from '../ui/ScrollReveal';
 
 export const SkillsSection: React.FC = () => {
   return (
     <SectionWrapper id="skills" bgVariant="primary">
-      <SectionHeading
-        eyebrow="TECHNICAL ARSENAL"
-        title="Engineering Capabilities &amp; Tech Stack"
-        description="An interconnected ecosystem of programming languages, modern web frameworks, database architectures, and development tools."
-      />
+      <ScrollReveal delay={0}>
+        <SectionHeading
+          eyebrow="TECHNICAL ARSENAL"
+          title="Engineering Capabilities &amp; Tech Stack"
+          description="An interconnected ecosystem of programming languages, modern web frameworks, database architectures, and development tools."
+        />
+      </ScrollReveal>
 
       {/* Unique High-Impact Bento Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-stretch">
@@ -28,7 +31,10 @@ export const SkillsSection: React.FC = () => {
         {/* =========================================================================
             BENTO CARD 1: Core Programming Engine (Large Hero Box - 7 cols)
         ========================================================================= */}
-        <div className="md:col-span-7 flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]">
+        <ScrollReveal
+          delay={50}
+          className="md:col-span-7 flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]"
+        >
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#8B5CF6]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#8B5CF6]/20 transition-all duration-500" />
 
           <div>
@@ -92,12 +98,15 @@ export const SkillsSection: React.FC = () => {
               <CheckCircle2 size={12} /> Ready
             </span>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* =========================================================================
             BENTO CARD 2: Modern Frontend & Interface Craft (5 cols)
         ========================================================================= */}
-        <div className="md:col-span-5 flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]">
+        <ScrollReveal
+          delay={150}
+          className="md:col-span-5 flex flex-col justify-between p-7 sm:p-8 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]"
+        >
           <div>
             <div className="flex items-center justify-between pb-5 border-b border-white/[0.06] mb-5">
               <div className="flex items-center gap-3">
@@ -135,12 +144,15 @@ export const SkillsSection: React.FC = () => {
             </span>
             <span className="text-[#A78BFA]">Mobile ──► 4K Ultra</span>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* =========================================================================
             BENTO CARD 3: Databases & Backend Storage Layer (4 cols)
         ========================================================================= */}
-        <div className="md:col-span-4 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]">
+        <ScrollReveal
+          delay={100}
+          className="md:col-span-4 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]"
+        >
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-white/[0.06] mb-5">
               <div className="flex items-center gap-3">
@@ -174,12 +186,15 @@ export const SkillsSection: React.FC = () => {
             <span>Schema Design &amp; Queries</span>
             <span className="text-[#8B5CF6]">ACID Compliant</span>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* =========================================================================
             BENTO CARD 4: Tools, IDE & AI-Assisted Workflow (4 cols)
         ========================================================================= */}
-        <div className="md:col-span-4 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]">
+        <ScrollReveal
+          delay={200}
+          className="md:col-span-4 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]"
+        >
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-white/[0.06] mb-5">
               <div className="flex items-center gap-3">
@@ -211,12 +226,15 @@ export const SkillsSection: React.FC = () => {
             </span>
             <span>Cloud Edge</span>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* =========================================================================
             BENTO CARD 5: Computer Science Foundations & Algorithms (4 cols)
         ========================================================================= */}
-        <div className="md:col-span-4 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]">
+        <ScrollReveal
+          delay={300}
+          className="md:col-span-4 flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-[#14141F] via-[#101017] to-[#0D0D14] border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl relative overflow-hidden group hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.2)]"
+        >
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-white/[0.06] mb-5">
               <div className="flex items-center gap-3">
@@ -250,7 +268,7 @@ export const SkillsSection: React.FC = () => {
             <span>Computational Thinking</span>
             <span className="text-[#8B5CF6]">O(log n) Focus</span>
           </div>
-        </div>
+        </ScrollReveal>
 
       </div>
     </SectionWrapper>

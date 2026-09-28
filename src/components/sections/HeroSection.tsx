@@ -25,27 +25,34 @@ export const HeroSection: React.FC = () => {
 
       <div className="max-w-[1200px] mx-auto px-5 sm:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
           {/* Left Column: Brand Identity, Headline & CTAs */}
           <div className="lg:col-span-7 flex flex-col items-start text-left space-y-7">
-            
             {/* Availability Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14141E]/90 border border-white/[0.08] backdrop-blur-md shadow-sm hover:border-[#8B5CF6]/40 transition-colors">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+            <div
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#14141E]/90 border border-white/[0.08] backdrop-blur-md shadow-sm hover:border-[#8B5CF6]/40 transition-colors animate-hero-entrance [animation-delay:100ms] opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
+              <span
+                className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+                aria-hidden="true"
+              />
               <span className="text-xs font-mono text-[#A1A1AA]">
                 {PROFILE.availability}
               </span>
             </div>
 
             {/* Main Headline & Display Treatment */}
-            <div className="space-y-3 max-w-2xl">
+            <div
+              className="space-y-3 max-w-2xl animate-hero-entrance [animation-delay:200ms] opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
               <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-extrabold text-[#F5F5F7] tracking-tight leading-[1.08]">
                 Building ideas into{' '}
                 <span className="bg-gradient-to-r from-white via-[#E2E8F0] to-[#A78BFA] bg-clip-text text-transparent">
                   digital experiences.
                 </span>
               </h1>
-              
+
               <div className="flex items-center gap-2 pt-1 text-xs sm:text-sm font-mono text-[#A78BFA] font-medium tracking-wide">
                 <Terminal size={14} className="text-[#8B5CF6]" />
                 <span>{PROFILE.eyebrow}</span>
@@ -53,12 +60,18 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Supporting Bio Paragraph */}
-            <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed max-w-xl font-normal">
+            <p
+              className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed max-w-xl font-normal animate-hero-entrance [animation-delay:300ms] opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
               {PROFILE.heroBio}
             </p>
 
             {/* CTA Action Buttons Group */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-1 w-full sm:w-auto">
+            <div
+              className="flex flex-wrap items-center gap-3.5 pt-1 w-full sm:w-auto animate-hero-entrance [animation-delay:400ms] opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
               <Button
                 href="#projects"
                 variant="primary"
@@ -83,13 +96,19 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Social Channels Strip */}
-            <div className="pt-3 flex flex-wrap items-center gap-5 border-t border-white/[0.08] w-full max-w-xl">
+            <div
+              className="pt-3 flex flex-wrap items-center gap-5 border-t border-white/[0.08] w-full max-w-xl animate-hero-entrance [animation-delay:500ms] opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
               <span className="text-xs font-mono text-[#71717A]">CONNECT</span>
               <SocialLinks iconSize={17} />
             </div>
 
             {/* Micro-Proof Stat Badges */}
-            <div className="grid grid-cols-3 gap-3 pt-2 w-full max-w-xl">
+            <div
+              className="grid grid-cols-3 gap-3 pt-2 w-full max-w-xl animate-hero-entrance [animation-delay:600ms] opacity-0"
+              style={{ animationFillMode: 'forwards' }}
+            >
               <div className="p-3 rounded-xl bg-[#12121A]/80 border border-white/[0.06] backdrop-blur-sm flex flex-col space-y-1">
                 <span className="text-base sm:text-lg font-bold text-white font-mono flex items-center gap-1.5">
                   <CheckCircle2 size={14} className="text-[#8B5CF6]" /> 3+
@@ -117,14 +136,15 @@ export const HeroSection: React.FC = () => {
                 </span>
               </div>
             </div>
-
           </div>
 
           {/* Right Column: Upgraded Portrait Frame */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end mt-4 lg:mt-0">
+          <div
+            className="lg:col-span-5 flex justify-center lg:justify-end mt-4 lg:mt-0 animate-hero-entrance [animation-delay:350ms] opacity-0"
+            style={{ animationFillMode: 'forwards' }}
+          >
             <PortraitFrame />
           </div>
-
         </div>
       </div>
     </section>

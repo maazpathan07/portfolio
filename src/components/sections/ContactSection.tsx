@@ -18,6 +18,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 import { Button } from '../ui/Button';
 import { SocialLinks } from '../ui/SocialLinks';
 import { Badge } from '../ui/Badge';
+import { ScrollReveal } from '../ui/ScrollReveal';
 
 export const ContactSection: React.FC = () => {
   const { formData, errors, status, serverMessage, handleChange, handleSubmit, resetStatus } =
@@ -34,19 +35,22 @@ export const ContactSection: React.FC = () => {
 
   return (
     <SectionWrapper id="contact" bgVariant="secondary">
-      <SectionHeading
-        eyebrow="DIRECT COMMUNICATION"
-        title="Let's Build Something Meaningful."
-        description="Whether you have an engineering opportunity, a client project requirement, or simply want to connect, send a direct message below."
-      />
+      <ScrollReveal delay={0}>
+        <SectionHeading
+          eyebrow="DIRECT COMMUNICATION"
+          title="Let's Build Something Meaningful."
+          description="Whether you have an engineering opportunity, a client project requirement, or simply want to connect, send a direct message below."
+        />
+      </ScrollReveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-        
         {/* =========================================================================
             Left Column: Direct Communication Hub
         ========================================================================= */}
-        <div className="lg:col-span-5 flex flex-col justify-between p-7 sm:p-9 rounded-3xl bg-[#13131D]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl space-y-7">
-          
+        <ScrollReveal
+          delay={100}
+          className="lg:col-span-5 flex flex-col justify-between p-7 sm:p-9 rounded-3xl bg-[#13131D]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl space-y-7"
+        >
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Badge label="Available for Hire" variant="violet" size="sm" dot />
@@ -90,7 +94,7 @@ export const ContactSection: React.FC = () => {
               href={`mailto:${PROFILE.email}`}
               className="flex items-center gap-2.5 text-sm sm:text-base font-semibold text-[#F5F5F7] hover:text-[#8B5CF6] transition-colors break-all"
             >
-              <Mail size={16} className="text-[#8B5CF6] shrink-0" aria-hidden="true" />
+              <Mail size={16} className="text-[#8B5CF6]" shrink-0 aria-hidden="true" />
               <span>{PROFILE.email}</span>
             </a>
           </div>
@@ -114,14 +118,15 @@ export const ContactSection: React.FC = () => {
             </span>
             <SocialLinks iconSize={18} />
           </div>
-
-        </div>
+        </ScrollReveal>
 
         {/* =========================================================================
             Right Column: Interactive Web3Forms Direct Message Engine
         ========================================================================= */}
-        <div className="lg:col-span-7 flex flex-col justify-between p-7 sm:p-9 rounded-3xl bg-[#14141E]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl">
-          
+        <ScrollReveal
+          delay={200}
+          className="lg:col-span-7 flex flex-col justify-between p-7 sm:p-9 rounded-3xl bg-[#14141E]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl"
+        >
           <div>
             {/* Form Card Header */}
             <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.08]">
@@ -177,7 +182,6 @@ export const ContactSection: React.FC = () => {
 
             {/* Interactive Form */}
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
-              
               {/* Honeypot Spam Prevention Field (Hidden from humans) */}
               <input
                 type="checkbox"
@@ -313,12 +317,9 @@ export const ContactSection: React.FC = () => {
                   {isSubmitting ? 'Sending Message...' : 'Send Message'}
                 </Button>
               </div>
-
             </form>
           </div>
-
-        </div>
-
+        </ScrollReveal>
       </div>
     </SectionWrapper>
   );
