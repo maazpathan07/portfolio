@@ -12,6 +12,7 @@ import {
   Briefcase,
   GraduationCap,
   BookOpen,
+  Terminal as TerminalIcon,
 } from 'lucide-react';
 import { NAV_LINKS } from '../../data/navigation';
 import { PROFILE } from '../../data/profile';
@@ -23,6 +24,7 @@ import profilePhoto from '../../assets/images/profile-portrait.jpg';
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenTerminal?: () => void;
   activeId: string;
 }
 
@@ -38,7 +40,12 @@ const NAV_ICONS: Record<string, React.ElementType> = {
   contact: Send,
 };
 
-export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeId }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({
+  isOpen,
+  onClose,
+  onOpenTerminal,
+  activeId,
+}) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -172,10 +179,21 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeI
           })}
         </nav>
 
-        {/* Footer Area with Live Clock, Action & Socials */}
-        <div className="pt-3.5 border-t border-white/[0.08] space-y-3">
+        {/* Footer Area with Live Clock, Terminal, Action & Socials */}
+        <div className="pt-3.5 border-t border-white/[0.08] space-y-2.5">
           {/* Live Surat Clock & Status in Drawer */}
           <LiveStatusClock variant="compact" className="w-full justify-center text-[11px]" />
+
+          {/* Quick Terminal Launch Button (maaz.sh) */}
+          {onOpenTerminal && (
+            <button
+              onClick={onOpenTerminal}
+              className="w-full py-2 px-3 rounded-xl bg-[#141422] hover:bg-[#1E1E32] border border-[#8B5CF6]/30 text-xs font-mono text-[#DDD6FE] flex items-center justify-center gap-2 transition-colors active:scale-98"
+            >
+              <TerminalIcon size={13} className="text-[#8B5CF6]" />
+              <span>Launch Terminal (maaz.sh)</span>
+            </button>
+          )}
 
           {/* Primary Action Button */}
           <Button

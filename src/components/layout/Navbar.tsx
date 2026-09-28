@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Terminal as TerminalIcon } from 'lucide-react';
 import { NAV_LINKS } from '../../data/navigation';
 import { PROFILE } from '../../data/profile';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { MobileMenu } from './MobileMenu';
+import { TerminalModal } from '../ui/TerminalModal';
 import profilePhoto from '../../assets/images/profile-portrait.jpg';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const sectionIds = NAV_LINKS.map((link) => link.id);
@@ -101,8 +103,18 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Action CTA & Mobile Trigger */}
-          <div className="flex items-center gap-2.5">
+          {/* Right Actions: Interactive Terminal & CTA */}
+          <div className="flex items-center gap-2">
+            {/* Interactive Terminal Button (maaz.sh) */}
+            <button
+              onClick={() => setIsTerminalOpen(true)}
+              title="Launch Interactive Terminal (maaz.sh)"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-mono font-medium bg-[#141420]/90 hover:bg-[#1E1E30] text-[#A78BFA] hover:text-white border border-[#8B5CF6]/30 hover:border-[#8B5CF6] shadow-sm hover:shadow-[0_0_18px_rgba(139,92,246,0.35)] transition-all duration-200 active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+            >
+              <TerminalIcon size={13} className="text-[#8B5CF6] group-hover:text-emerald-400 transition-colors" />
+              <span className="hidden sm:inline">maaz.sh</span>
+            </button>
+
             {/* Desktop Quick Connect CTA */}
             <a
               href="#contact"
@@ -148,7 +160,17 @@ export const Navbar: React.FC = () => {
       <MobileMenu
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
+        onOpenTerminal={() => {
+          setIsDrawerOpen(false);
+          setIsTerminalOpen(true);
+        }}
         activeId={activeId}
+      />
+
+      {/* Interactive Developer CLI Terminal Modal */}
+      <TerminalModal
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
       />
     </>
   );

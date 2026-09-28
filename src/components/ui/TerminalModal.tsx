@@ -1,0 +1,490 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Terminal as TerminalIcon,
+  X,
+  Maximize2,
+  Minimize2,
+  Sparkles,
+  Send,
+  ExternalLink,
+} from 'lucide-react';
+import { PROFILE } from '../../data/profile';
+import { PROJECTS } from '../../data/projects';
+import { SKILL_CATEGORIES } from '../../data/skills';
+
+interface TerminalModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+interface CommandHistoryItem {
+  command: string;
+  output: React.ReactNode;
+  timestamp: string;
+}
+
+export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose }) => {
+  const [inputVal, setInputVal] = useState('');
+  const [history, setHistory] = useState<CommandHistoryItem[]>([]);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [isMaximized, setIsMaximized] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const terminalEndRef = useRef<HTMLDivElement>(null);
+
+  // Initialize welcome banner
+  useEffect(() => {
+    if (history.length === 0) {
+      setHistory([
+        {
+          command: 'init',
+          timestamp: new Date().toLocaleTimeString(),
+          output: (
+            <div className="space-y-2 text-[#DDD6FE]">
+              <p className="font-bold text-[#A78BFA]">
+                ⚡ Welcome to Maaz Pathan's Interactive Shell (maaz.sh v1.0)
+              </p>
+              <p className="text-[#A1A1AA] text-xs">
+                Type <span className="text-emerald-400 font-bold">'help'</span> to see all available commands, or click the quick pills below.
+              </p>
+            </div>
+          ),
+        },
+      ]);
+    }
+  }, [history.length]);
+
+  // Handle auto-focus and body scroll lock
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+      setTimeout(() => inputRef.current?.focus(), 100);
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  // Auto scroll to bottom of terminal
+  useEffect(() => {
+    if (isOpen) {
+      terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [history, isOpen]);
+
+  // Execute terminal command
+  const executeCommand = (cmdText: string) => {
+    const trimmed = cmdText.trim().toLowerCase();
+    if (!trimmed) return;
+
+    const time = new Date().toLocaleTimeString();
+    setCommandHistory((prev) => [...prev, cmdText]);
+    setHistoryIndex(-1);
+
+    let outputNode: React.ReactNode = null;
+
+    switch (trimmed) {
+      case 'help':
+        outputNode = (
+          <div className="space-y-1.5 text-xs">
+            <p className="text-[#A78BFA] font-bold pb-1 border-b border-white/10">
+              AVAILABLE COMMANDS:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 font-mono text-[#E2E8F0]">
+              <div><span className="text-emerald-400 font-bold">about</span> - Background & engineering summary</div>
+              <div><span className="text-emerald-400 font-bold">skills</span> - Interactive tech stack matrix</div>
+              <div><span className="text-emerald-400 font-bold">projects</span> - Deployed client websites & URLs</div>
+              <div><span className="text-emerald-400 font-bold">experience</span> - Freelance client delivery history</div>
+              <div><span className="text-emerald-400 font-bold">education</span> - B.Tech IT & Diploma qualifications</div>
+              <div><span className="text-emerald-400 font-bold">contact</span> - Direct email & contact info</div>
+              <div><span className="text-emerald-400 font-bold">socials</span> - GitHub, LinkedIn, Instagram links</div>
+              <div><span className="text-emerald-400 font-bold">sudo hire-maaz</span> - 🎉 Hire command with celebratory burst</div>
+              <div><span className="text-emerald-400 font-bold">clear</span> - Clear terminal history</div>
+              <div><span className="text-emerald-400 font-bold">exit</span> - Close terminal window</div>
+            </div>
+          </div>
+        );
+        break;
+
+      case 'about':
+        outputNode = (
+          <div className="space-y-2 text-xs text-[#D4D4D8]">
+            <p className="text-emerald-400 font-bold text-sm">{PROFILE.fullName}</p>
+            <p className="text-[#A78BFA] font-mono">{PROFILE.title}</p>
+            <p className="leading-relaxed text-[#A1A1AA]">{PROFILE.heroBio}</p>
+            <p className="text-[11px] font-mono text-[#71717A]">Location: {PROFILE.location} · Status: {PROFILE.availability}</p>
+          </div>
+        );
+        break;
+
+      case 'skills':
+        outputNode = (
+          <div className="space-y-2.5 text-xs">
+            <p className="text-[#A78BFA] font-bold">TECHNICAL SKILLS MATRIX:</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {SKILL_CATEGORIES.map((cat) => (
+                <div key={cat.id} className="p-2 rounded-lg bg-[#141420] border border-white/10">
+                  <span className="text-emerald-400 font-bold text-[11px] block">{cat.title}</span>
+                  <span className="text-[#A1A1AA] text-[10px]">
+                    {cat.skills.map((s) => s.name).join(' · ')}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+        break;
+
+      case 'projects':
+        outputNode = (
+          <div className="space-y-2 text-xs">
+            <p className="text-[#A78BFA] font-bold">FEATURED CLIENT WEBSITES (ALL WITH CUSTOM ADMIN PANELS):</p>
+            <div className="space-y-1.5">
+              {PROJECTS.map((proj) => (
+                <div key={proj.id} className="p-2 rounded-lg bg-[#141420] border border-white/10 flex items-center justify-between">
+                  <div>
+                    <span className="text-white font-bold">{proj.title}</span>
+                    <span className="text-[10px] text-[#A1A1AA] block">{proj.category}</span>
+                  </div>
+                  <a
+                    href={proj.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded bg-[#8B5CF6]/30 text-[#DDD6FE] hover:bg-[#8B5CF6] hover:text-white transition-colors"
+                  >
+                    <span>Visit</span>
+                    <ExternalLink size={10} />
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+        break;
+
+      case 'experience':
+        outputNode = (
+          <div className="space-y-1.5 text-xs text-[#D4D4D8]">
+            <p className="text-[#A78BFA] font-bold">FREELANCE CLIENT WORKFLOW:</p>
+            <p className="text-emerald-400 font-semibold">Freelance Web Developer (2024 — Present)</p>
+            <p className="text-[#A1A1AA] text-xs">
+              Delivering end-to-end client websites, custom admin panels, responsive UI, and Vercel cloud hosting.
+            </p>
+          </div>
+        );
+        break;
+
+      case 'education':
+        outputNode = (
+          <div className="space-y-1.5 text-xs text-[#D4D4D8]">
+            <p className="text-[#A78BFA] font-bold">EDUCATION TIMELINE:</p>
+            <p>🎓 <span className="text-white font-bold">B.Tech in Information Technology</span> @ P P Savani University (2025–2028)</p>
+            <p>📜 <span className="text-white font-bold">Diploma in Computer Engineering</span> (2022–2025)</p>
+          </div>
+        );
+        break;
+
+      case 'contact':
+        outputNode = (
+          <div className="space-y-1.5 text-xs text-[#D4D4D8]">
+            <p className="text-[#A78BFA] font-bold">DIRECT CONTACT INFO:</p>
+            <p>📧 Email: <a href={`mailto:${PROFILE.email}`} className="text-emerald-400 underline">{PROFILE.email}</a></p>
+            <p>📍 Location: <span className="text-white">{PROFILE.location}</span></p>
+            <p>⚡ Status: <span className="text-emerald-400">{PROFILE.availability}</span></p>
+          </div>
+        );
+        break;
+
+      case 'socials':
+        outputNode = (
+          <div className="space-y-1.5 text-xs text-[#D4D4D8]">
+            <p className="text-[#A78BFA] font-bold">SOCIAL & PROFILES:</p>
+            <div className="flex flex-wrap gap-2 pt-1">
+              {PROFILE.socials.map((soc) => (
+                <a
+                  key={soc.name}
+                  href={soc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 rounded bg-[#161624] border border-white/10 hover:border-[#8B5CF6] text-xs text-white flex items-center gap-1 transition-colors"
+                >
+                  <span>{soc.name}</span>
+                  <ExternalLink size={10} />
+                </a>
+              ))}
+            </div>
+          </div>
+        );
+        break;
+
+      case 'sudo hire-maaz':
+      case 'hire-maaz':
+      case 'hire':
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 5000);
+        outputNode = (
+          <div className="p-3.5 rounded-xl bg-gradient-to-r from-[#8B5CF6]/30 via-emerald-500/20 to-[#8B5CF6]/30 border border-[#8B5CF6]/50 space-y-2 text-xs">
+            <div className="flex items-center gap-2 text-sm font-bold text-white">
+              <Sparkles size={16} className="text-amber-400 animate-spin" />
+              <span>🎉 SUCCESS! Let's Build Something Great Together!</span>
+            </div>
+            <p className="text-[#E2E8F0]">
+              Thank you for considering Maaz Pathan! Open for full-time software engineering roles and freelance client projects.
+            </p>
+            <div className="pt-1 flex items-center gap-2">
+              <a
+                href="#contact"
+                onClick={onClose}
+                className="px-3 py-1 rounded-lg bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-bold text-xs flex items-center gap-1.5 transition-colors"
+              >
+                <Send size={11} />
+                <span>Open Contact Form</span>
+              </a>
+              <a
+                href={`mailto:${PROFILE.email}`}
+                className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs transition-colors"
+              >
+                Send Email Directly
+              </a>
+            </div>
+          </div>
+        );
+        break;
+
+      case 'clear':
+      case 'cls':
+        setHistory([]);
+        return;
+
+      case 'exit':
+      case 'quit':
+        onClose();
+        return;
+
+      case 'date':
+      case 'time':
+        outputNode = (
+          <p className="text-emerald-400 text-xs font-mono">
+            Surat, India: {new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })} (IST)
+          </p>
+        );
+        break;
+
+      case 'whoami':
+        outputNode = (
+          <p className="text-[#A1A1AA] text-xs font-mono">
+            guest_visitor@portfolio (Session active) · Welcome to Maaz Pathan's Portfolio!
+          </p>
+        );
+        break;
+
+      default:
+        outputNode = (
+          <p className="text-rose-400 text-xs font-mono">
+            zsh: command not found: <span className="text-white">{cmdText}</span>. Type <span className="text-emerald-400 font-bold">'help'</span> for list of commands.
+          </p>
+        );
+        break;
+    }
+
+    setHistory((prev) => [
+      ...prev,
+      {
+        command: cmdText,
+        output: outputNode,
+        timestamp: time,
+      },
+    ]);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputVal.trim()) return;
+    executeCommand(inputVal);
+    setInputVal('');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length === 0) return;
+      const nextIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+      setHistoryIndex(nextIndex);
+      setInputVal(commandHistory[nextIndex]);
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex === -1) return;
+      const nextIndex = historyIndex + 1;
+      if (nextIndex >= commandHistory.length) {
+        setHistoryIndex(-1);
+        setInputVal('');
+      } else {
+        setHistoryIndex(nextIndex);
+        setInputVal(commandHistory[nextIndex]);
+      }
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-hidden animate-fadeIn"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Interactive Developer Terminal"
+    >
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/80 backdrop-blur-xl transition-opacity"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Confetti Particles (CSS based, lightweight) */}
+      {showConfetti && (
+        <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
+          {Array.from({ length: 40 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2.5 h-2.5 rounded-sm animate-bounce"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 50}%`,
+                backgroundColor: ['#8B5CF6', '#10B981', '#F59E0B', '#EC4899', '#3B82F6'][i % 5],
+                transform: `rotate(${Math.random() * 360}deg)`,
+                animationDuration: `${1 + Math.random() * 2}s`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Terminal Window */}
+      <div
+        className={`relative z-10 w-full bg-[#0B0B12] border border-white/15 rounded-2xl shadow-[0_0_80px_rgba(0,0,0,0.9),0_0_40px_rgba(139,92,246,0.25)] flex flex-col transition-all duration-300 overflow-hidden ${
+          isMaximized ? 'h-[94vh] max-w-[96vw]' : 'h-[520px] max-w-2xl'
+        }`}
+      >
+        {/* Terminal Titlebar */}
+        <div className="bg-[#12121D] px-4 py-2.5 border-b border-white/10 flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2">
+            {/* macOS Buttons */}
+            <button
+              onClick={onClose}
+              title="Close Terminal"
+              className="w-3 h-3 rounded-full bg-rose-500/80 hover:bg-rose-500 transition-colors"
+            />
+            <button
+              onClick={() => setHistory([])}
+              title="Clear Terminal"
+              className="w-3 h-3 rounded-full bg-amber-500/80 hover:bg-amber-500 transition-colors"
+            />
+            <button
+              onClick={() => setIsMaximized(!isMaximized)}
+              title="Toggle Fullscreen"
+              className="w-3 h-3 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition-colors"
+            />
+          </div>
+
+          <div className="flex items-center gap-1.5 text-xs font-mono text-[#A1A1AA]">
+            <TerminalIcon size={13} className="text-[#8B5CF6]" />
+            <span className="font-semibold text-[#F5F5F7]">maaz@portfolio: ~ (maaz.sh)</span>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setIsMaximized(!isMaximized)}
+              className="p-1 rounded-md text-[#71717A] hover:text-white transition-colors"
+              title={isMaximized ? 'Restore' : 'Maximize'}
+            >
+              {isMaximized ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+            </button>
+            <button
+              onClick={onClose}
+              className="p-1 rounded-md text-[#71717A] hover:text-white transition-colors"
+              title="Close (Esc)"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        </div>
+
+        {/* Terminal Body Screen */}
+        <div
+          className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-3 font-mono text-xs text-[#E2E8F0] scrollbar-thin scrollbar-thumb-[#1F1F2C]"
+          onClick={() => inputRef.current?.focus()}
+        >
+          {history.map((item, idx) => (
+            <div key={idx} className="space-y-1.5">
+              {item.command !== 'init' && (
+                <div className="flex items-center gap-2 text-[#A78BFA]">
+                  <span className="text-emerald-400">➜</span>
+                  <span className="text-[#8B5CF6]">maaz@portfolio:~$</span>
+                  <span className="text-white font-semibold">{item.command}</span>
+                  <span className="text-[10px] text-[#71717A] ml-auto">{item.timestamp}</span>
+                </div>
+              )}
+              <div className="pl-4 sm:pl-6">{item.output}</div>
+            </div>
+          ))}
+
+          {/* Active Input Line */}
+          <form onSubmit={handleSubmit} className="flex items-center gap-2 pt-2">
+            <span className="text-emerald-400">➜</span>
+            <span className="text-[#8B5CF6] shrink-0">maaz@portfolio:~$</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputVal}
+              onChange={(e) => setInputVal(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="type 'help', 'skills', 'projects', 'sudo hire-maaz'..."
+              className="flex-1 bg-transparent border-none outline-none text-white text-xs font-mono placeholder-[#52525B]"
+              autoComplete="off"
+              spellCheck="false"
+            />
+          </form>
+
+          <div ref={terminalEndRef} />
+        </div>
+
+        {/* Quick Command Suggestions Footer Bar */}
+        <div className="bg-[#0F0F1A] px-4 py-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+            <span className="text-[#71717A] text-[10px]">Quick:</span>
+            {['help', 'skills', 'projects', 'sudo hire-maaz', 'contact', 'clear'].map((cmd) => (
+              <button
+                key={cmd}
+                onClick={() => {
+                  executeCommand(cmd);
+                  inputRef.current?.focus();
+                }}
+                className="px-2 py-0.5 rounded-md bg-[#181826] hover:bg-[#8B5CF6]/30 border border-white/10 hover:border-[#8B5CF6]/50 text-[#C4B5FD] transition-colors"
+              >
+                {cmd}
+              </button>
+            ))}
+          </div>
+
+          <span className="text-[10px] font-mono text-[#71717A] hidden sm:block">
+            Press <kbd className="px-1 py-0.5 rounded bg-white/10 text-white">Esc</kbd> to exit
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
