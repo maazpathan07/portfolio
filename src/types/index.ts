@@ -3,6 +3,8 @@ export interface ProjectItem {
   title: string;
   category: string;
   isClientProject: boolean;
+  hasAdminPanel?: boolean;
+  adminFeature?: string;
   description: string;
   workflowNote: string;
   technologies: string[];

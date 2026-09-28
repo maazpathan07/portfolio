@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, Lock, Sparkles, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import { Globe, Lock, Sparkles, CheckCircle2, ArrowUpRight, LayoutDashboard } from 'lucide-react';
 import type { ProjectItem } from '../../types';
 
 interface ProjectCardProps {
@@ -35,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       </div>
 
       {/* =========================================================================
-          2. Compact Visual Banner
+          2. Compact Visual Banner with Admin Badge
       ========================================================================= */}
       <div
         className={`relative w-full h-28 sm:h-32 bg-gradient-to-br ${project.previewGradient} flex flex-col justify-between p-3.5 sm:p-4 overflow-hidden`}
@@ -54,23 +54,33 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
         </div>
 
         {/* Center Brand Name & Icon */}
-        <div className="relative z-10 flex items-center gap-2.5 my-auto">
-          <div className="w-9 h-9 rounded-xl bg-[#0B0B0F]/85 border border-white/10 flex items-center justify-center text-[#A78BFA] shadow-md group-hover:scale-105 group-hover:border-[#8B5CF6]/60 transition-all shrink-0">
-            <Globe size={18} aria-hidden="true" />
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-[#0B0B0F]/85 border border-white/10 flex items-center justify-center text-[#A78BFA] shadow-md group-hover:scale-105 group-hover:border-[#8B5CF6]/60 transition-all shrink-0">
+              <Globe size={18} aria-hidden="true" />
+            </div>
+            <div>
+              <h3 className="text-sm sm:text-base font-bold text-[#F5F5F7] tracking-tight group-hover:text-white transition-colors leading-tight">
+                {project.title}
+              </h3>
+              <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1 pt-0.5">
+                <CheckCircle2 size={10} /> Verified Client Platform
+              </span>
+            </div>
           </div>
-          <div>
-            <h3 className="text-sm sm:text-base font-bold text-[#F5F5F7] tracking-tight group-hover:text-white transition-colors leading-tight">
-              {project.title}
-            </h3>
-            <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1 pt-0.5">
-              <CheckCircle2 size={10} /> Verified Client Platform
-            </span>
-          </div>
+
+          {/* Admin Panel Feature Indicator Badge */}
+          {project.hasAdminPanel && (
+            <div className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#8B5CF6]/20 border border-[#8B5CF6]/40 text-[#DDD6FE] text-[10px] font-mono shadow-sm">
+              <LayoutDashboard size={10} className="text-[#A78BFA]" />
+              <span>Admin Panel</span>
+            </div>
+          )}
         </div>
       </div>
 
       {/* =========================================================================
-          3. Compact Project Details
+          3. Compact Project Details with Admin Highlight
       ========================================================================= */}
       <div className="flex flex-col flex-1 p-4 sm:p-4.5 space-y-3">
         {/* Description */}
@@ -84,16 +94,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <span className="leading-snug line-clamp-2">{project.workflowNote}</span>
         </div>
 
-        {/* Tech Pills */}
+        {/* Tech Pills with Highlighted Admin Tag */}
         <div className="flex flex-wrap gap-1.5 pt-0.5">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="px-2 py-0.5 rounded-md bg-[#0E0E16] border border-white/[0.05] text-[10px] sm:text-[11px] font-medium text-[#A1A1AA]"
-            >
-              {tech}
-            </span>
-          ))}
+          {project.technologies.map((tech) => {
+            const isAdmin = tech.toLowerCase().includes('admin');
+            return (
+              <span
+                key={tech}
+                className={`px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-medium transition-colors ${
+                  isAdmin
+                    ? 'bg-[#8B5CF6]/25 border border-[#8B5CF6]/50 text-[#EDE9FE] font-semibold flex items-center gap-1 shadow-[0_0_10px_rgba(139,92,246,0.25)]'
+                    : 'bg-[#0E0E16] border border-white/[0.05] text-[#A1A1AA]'
+                }`}
+              >
+                {isAdmin && <LayoutDashboard size={10} className="text-[#C4B5FD]" />}
+                <span>{tech}</span>
+              </span>
+            );
+          })}
         </div>
 
         {/* Compact Action Row */}
