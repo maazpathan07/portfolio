@@ -18,8 +18,8 @@ export const ProjectsSection: React.FC = () => {
         />
       </ScrollReveal>
 
-      {/* 3 High-Impact Project Showcase Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-8 items-stretch">
+      {/* 3 Compact & Sleek Project Showcase Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
         {PROJECTS.map((project, index) => (
           <ScrollReveal key={project.id} delay={index * 120}>
             <ProjectCard project={project} index={index} />
@@ -28,17 +28,17 @@ export const ProjectsSection: React.FC = () => {
       </div>
 
       {/* Bottom Client Reassurance Card */}
-      <ScrollReveal delay={150} className="mt-12">
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#14141E] via-[#1A1A28] to-[#14141E] border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="flex items-start sm:items-center gap-4 text-left">
-            <div className="p-3.5 rounded-2xl bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-[#A78BFA] shrink-0">
-              <Zap size={24} />
+      <ScrollReveal delay={150} className="mt-10">
+        <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#14141E] via-[#1A1A28] to-[#14141E] border border-white/[0.08] flex flex-col md:flex-row items-center justify-between gap-5 shadow-lg">
+          <div className="flex items-start sm:items-center gap-3.5 text-left">
+            <div className="p-3 rounded-xl bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-[#A78BFA] shrink-0">
+              <Zap size={22} />
             </div>
-            <div className="space-y-1">
-              <h4 className="text-base sm:text-lg font-bold text-[#F5F5F7]">
+            <div className="space-y-0.5">
+              <h4 className="text-sm sm:text-base font-bold text-[#F5F5F7]">
                 Need a modern, high-performance website for your brand?
               </h4>
-              <p className="text-xs sm:text-sm text-[#A1A1AA]">
+              <p className="text-xs text-[#A1A1AA]">
                 From concept to live Vercel cloud deployment, I deliver responsive digital experiences with clean code.
               </p>
             </div>
@@ -47,7 +47,7 @@ export const ProjectsSection: React.FC = () => {
           <Button
             href="#contact"
             variant="primary"
-            size="md"
+            size="sm"
             icon={ArrowRight}
             iconPosition="right"
             className="shrink-0 w-full sm:w-auto"
