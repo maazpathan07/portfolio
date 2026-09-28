@@ -1,5 +1,16 @@
-import React from 'react';
-import { Globe, Lock, Sparkles, CheckCircle2, ArrowUpRight, LayoutDashboard } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  Globe,
+  Lock,
+  Sparkles,
+  CheckCircle2,
+  ArrowUpRight,
+  LayoutDashboard,
+  Monitor,
+  Smartphone,
+  Wifi,
+  Battery,
+} from 'lucide-react';
 import type { ProjectItem } from '../../types';
 
 interface ProjectCardProps {
@@ -8,75 +19,156 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+  const [deviceView, setDeviceView] = useState<'desktop' | 'mobile'>('desktop');
+
   return (
     <div className="group relative flex flex-col rounded-2xl bg-[#12121B]/95 border border-white/[0.08] hover:border-[#8B5CF6]/50 transition-all duration-400 overflow-hidden shadow-xl hover:shadow-[0_12px_32px_-8px_rgba(139,92,246,0.22)] hover:-translate-y-1">
       {/* =========================================================================
-          1. Compact Browser Header Bar
+          1. Interactive Device Frame Header & Switcher
       ========================================================================= */}
       <div className="bg-[#0D0D14] border-b border-white/[0.06] px-3.5 py-2 flex items-center justify-between">
-        {/* Traffic Lights */}
-        <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="w-2 h-2 rounded-full bg-rose-500/80" />
-          <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-          <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
-        </div>
+        {/* Left: Traffic Lights (Desktop) or iOS Dynamic Island Dot (Mobile) */}
+        {deviceView === 'desktop' ? (
+          <div className="flex items-center gap-1.5" aria-hidden="true">
+            <span className="w-2 h-2 rounded-full bg-rose-500/80" />
+            <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+          </div>
+        ) : (
+          <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#A1A1AA]">
+            <span className="font-bold text-[#F5F5F7]">9:41</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          </div>
+        )}
 
-        {/* Live URL Pill */}
-        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#161622] border border-white/[0.06] text-[10px] font-mono text-[#A1A1AA] max-w-[170px] truncate">
+        {/* Center: Live URL Pill */}
+        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#161622] border border-white/[0.06] text-[10px] font-mono text-[#A1A1AA] max-w-[140px] sm:max-w-[160px] truncate">
           <Globe size={10} className="text-[#8B5CF6] shrink-0" />
           <span className="truncate">{project.liveUrl.replace('https://', '')}</span>
         </div>
 
-        {/* Online Status */}
-        <div className="flex items-center gap-1 text-[10px] font-mono text-emerald-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="hidden sm:inline">Online</span>
+        {/* Right: Interactive Desktop ↔ Mobile Device Switcher */}
+        <div className="flex items-center gap-1 p-0.5 rounded-lg bg-[#171724] border border-white/[0.08] shadow-inner">
+          <button
+            onClick={() => setDeviceView('desktop')}
+            title="Desktop View Mockup"
+            aria-label={`Switch to desktop view for ${project.title}`}
+            aria-pressed={deviceView === 'desktop'}
+            className={`p-1 rounded-md transition-all ${
+              deviceView === 'desktop'
+                ? 'bg-[#8B5CF6] text-white shadow-[0_0_8px_rgba(139,92,246,0.6)]'
+                : 'text-[#71717A] hover:text-[#F5F5F7]'
+            }`}
+          >
+            <Monitor size={11} />
+          </button>
+          <button
+            onClick={() => setDeviceView('mobile')}
+            title="Mobile iPhone Mockup"
+            aria-label={`Switch to mobile iPhone view for ${project.title}`}
+            aria-pressed={deviceView === 'mobile'}
+            className={`p-1 rounded-md transition-all ${
+              deviceView === 'mobile'
+                ? 'bg-[#8B5CF6] text-white shadow-[0_0_8px_rgba(139,92,246,0.6)]'
+                : 'text-[#71717A] hover:text-[#F5F5F7]'
+            }`}
+          >
+            <Smartphone size={11} />
+          </button>
         </div>
       </div>
 
       {/* =========================================================================
-          2. Compact Visual Banner with Admin Badge
+          2. Morphing Visual Banner (Desktop Window ↔ Mobile iPhone Frame)
       ========================================================================= */}
       <div
-        className={`relative w-full h-28 sm:h-32 bg-gradient-to-br ${project.previewGradient} flex flex-col justify-between p-3.5 sm:p-4 overflow-hidden`}
+        className={`relative w-full h-28 sm:h-32 bg-gradient-to-br ${project.previewGradient} flex flex-col justify-between p-3.5 sm:p-4 overflow-hidden transition-all duration-300`}
       >
         {/* Grid pattern overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:14px_14px] pointer-events-none" />
 
-        {/* Top Badges Row */}
-        <div className="relative z-10 flex items-center justify-between w-full">
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#0D0D14]/80 border border-white/10 text-[#A78BFA]">
-            {project.category}
-          </span>
-          <span className="font-mono text-[10px] font-bold text-white/40">
-            0{index + 1}
-          </span>
-        </div>
-
-        {/* Center Brand Name & Icon */}
-        <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#0B0B0F]/85 border border-white/10 flex items-center justify-center text-[#A78BFA] shadow-md group-hover:scale-105 group-hover:border-[#8B5CF6]/60 transition-all shrink-0">
-              <Globe size={18} aria-hidden="true" />
+        {deviceView === 'desktop' ? (
+          /* Desktop View Content */
+          <>
+            {/* Top Badges Row */}
+            <div className="relative z-10 flex items-center justify-between w-full">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#0D0D14]/80 border border-white/10 text-[#A78BFA]">
+                {project.category}
+              </span>
+              <span className="font-mono text-[10px] font-bold text-white/40">
+                0{index + 1}
+              </span>
             </div>
-            <div>
-              <h3 className="text-sm sm:text-base font-bold text-[#F5F5F7] tracking-tight group-hover:text-white transition-colors leading-tight">
-                {project.title}
-              </h3>
-              <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1 pt-0.5">
-                <CheckCircle2 size={10} /> Verified Client Platform
+
+            {/* Center Brand Name & Icon */}
+            <div className="relative z-10 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#0B0B0F]/85 border border-white/10 flex items-center justify-center text-[#A78BFA] shadow-md group-hover:scale-105 group-hover:border-[#8B5CF6]/60 transition-all shrink-0">
+                  <Globe size={18} aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-[#F5F5F7] tracking-tight group-hover:text-white transition-colors leading-tight">
+                    {project.title}
+                  </h3>
+                  <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1 pt-0.5">
+                    <CheckCircle2 size={10} /> Verified Client Platform
+                  </span>
+                </div>
+              </div>
+
+              {/* Admin Panel Feature Indicator Badge */}
+              {project.hasAdminPanel && (
+                <div className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#8B5CF6]/20 border border-[#8B5CF6]/40 text-[#DDD6FE] text-[10px] font-mono shadow-sm">
+                  <LayoutDashboard size={10} className="text-[#A78BFA]" />
+                  <span>Admin Panel</span>
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          /* Mobile iPhone Frame Mockup Content */
+          <div className="relative z-10 flex flex-col justify-between h-full w-full">
+            {/* iPhone Top Notch / Dynamic Island & Status Icons */}
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-1 text-[9px] font-mono text-white/70">
+                <Wifi size={10} className="text-white/80" />
+                <span>5G</span>
+              </div>
+
+              {/* Dynamic Island Capsule */}
+              <div className="flex items-center justify-center gap-1.5 px-3 py-0.5 rounded-full bg-black/90 border border-white/10 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse" />
+                <span className="text-[9px] font-mono text-[#DDD6FE] font-medium">Responsive</span>
+              </div>
+
+              <div className="flex items-center gap-1 text-[9px] font-mono text-white/70">
+                <span>100%</span>
+                <Battery size={11} className="text-emerald-400" />
+              </div>
+            </div>
+
+            {/* Mobile View Center Preview */}
+            <div className="flex items-center justify-between p-2 rounded-xl bg-[#09090E]/90 border border-[#8B5CF6]/30 shadow-inner">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-lg bg-[#8B5CF6]/20 flex items-center justify-center text-[#C4B5FD]">
+                  <Smartphone size={12} />
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-white block leading-none">
+                    {project.title}
+                  </span>
+                  <span className="text-[9px] font-mono text-emerald-400 leading-none">
+                    100% Mobile Optimized
+                  </span>
+                </div>
+              </div>
+
+              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/[0.06] text-[#A78BFA]">
+                Touch UI
               </span>
             </div>
           </div>
-
-          {/* Admin Panel Feature Indicator Badge */}
-          {project.hasAdminPanel && (
-            <div className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#8B5CF6]/20 border border-[#8B5CF6]/40 text-[#DDD6FE] text-[10px] font-mono shadow-sm">
-              <LayoutDashboard size={10} className="text-[#A78BFA]" />
-              <span>Admin Panel</span>
-            </div>
-          )}
-        </div>
+        )}
       </div>
 
       {/* =========================================================================
