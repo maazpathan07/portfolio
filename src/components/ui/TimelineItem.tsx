@@ -24,7 +24,6 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
   status,
   statusLabel,
   description,
-  highlights = [],
   isLast = false,
 }) => {
   const isOngoing = status === 'ongoing';
@@ -60,16 +59,16 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
       </div>
 
       {/* High-End Card Content */}
-      <div className={`flex-1 pb-10 ${isLast ? 'pb-0' : ''}`}>
+      <div className={`flex-1 pb-8 ${isLast ? 'pb-0' : ''}`}>
         <div
-          className={`p-7 sm:p-8 rounded-3xl border transition-all duration-300 shadow-xl ${
+          className={`p-6 sm:p-7 rounded-3xl border transition-all duration-300 shadow-xl ${
             isOngoing
               ? 'bg-[#14141F]/95 border-[#8B5CF6]/40 shadow-[0_10px_35px_-10px_rgba(139,92,246,0.2)] hover:border-[#8B5CF6]/60'
               : 'bg-[#12121A]/90 border-white/[0.08] hover:border-white/20'
           }`}
         >
           {/* Header Row */}
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-3.5">
             <Badge
               label={statusLabel}
               variant={isOngoing ? 'violet' : 'zinc'}
@@ -83,12 +82,12 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
           </div>
 
           {/* Title & Field */}
-          <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F7] tracking-tight">
+          <h3 className="text-lg sm:text-xl font-bold text-[#F5F5F7] tracking-tight">
             {title}
           </h3>
 
           {subtitle && (
-            <p className="text-sm font-semibold text-[#A78BFA] mt-1 font-mono">
+            <p className="text-xs sm:text-sm font-semibold text-[#A78BFA] mt-1 font-mono">
               {subtitle}
             </p>
           )}
@@ -113,29 +112,9 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
 
           {/* Course Overview */}
           {description && (
-            <p className="text-sm text-[#A1A1AA] leading-relaxed mt-4">
+            <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed mt-3.5 pt-3.5 border-t border-white/[0.06]">
               {description}
             </p>
-          )}
-
-          {/* Coursework Highlight Chips */}
-          {highlights.length > 0 && (
-            <div className="mt-5 pt-5 border-t border-white/[0.06] space-y-3">
-              <span className="text-[11px] font-mono text-[#A78BFA] uppercase tracking-wider block">
-                Key Curriculum &amp; Specialization Areas:
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#A1A1AA]">
-                {highlights.map((highlight) => (
-                  <div
-                    key={highlight}
-                    className="p-2.5 rounded-xl bg-[#0D0D14] border border-white/[0.04] flex items-center gap-2 text-[#E2E8F0]"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] shrink-0" aria-hidden="true" />
-                    <span>{highlight}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           )}
         </div>
       </div>
