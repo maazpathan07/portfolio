@@ -93,7 +93,7 @@ export const ContactSection: React.FC = () => {
               href={`mailto:${PROFILE.email}`}
               className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#F5F5F7] hover:text-[#8B5CF6] transition-colors break-all"
             >
-              <Mail size={15} className="text-[#8B5CF6]" shrink-0 aria-hidden="true" />
+              <Mail size={15} className="text-[#8B5CF6] shrink-0" aria-hidden="true" />
               <span>{PROFILE.email}</span>
             </a>
           </div>
