@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
                 className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
                 aria-hidden="true"
               />
-              <span className="text-xs font-mono text-[#A1A1AA]">
+              <span className="text-xs font-medium text-[#A1A1AA]">
                 {PROFILE.availability}
               </span>
             </div>
@@ -56,9 +56,9 @@ export const HeroSection: React.FC = () => {
               </h1>
 
               {/* Sub-headline / Mission Tagline */}
-              <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#D4D4D8] tracking-tight leading-snug">
+              <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#E2E8F0] tracking-tight leading-snug">
                 Building ideas into{' '}
-                <span className="bg-gradient-to-r from-white via-[#E2E8F0] to-[#A78BFA] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#C4B5FD] via-[#DDD6FE] to-white bg-clip-text text-transparent">
                   digital experiences.
                 </span>
               </p>
@@ -111,38 +111,43 @@ export const HeroSection: React.FC = () => {
               className="pt-3 flex flex-wrap items-center gap-5 border-t border-white/[0.08] w-full max-w-xl animate-hero-entrance [animation-delay:500ms] opacity-0"
               style={{ animationFillMode: 'forwards' }}
             >
-              <span className="text-xs font-mono text-[#71717A]">CONNECT</span>
+              <span className="text-xs font-semibold tracking-wider text-[#71717A] uppercase">
+                Connect
+              </span>
               <SocialLinks iconSize={17} />
             </div>
 
-            {/* Micro-Proof Stat Badges */}
+            {/* Micro-Proof Stat Badges (Modern Editorial Polish) */}
             <div
               className="grid grid-cols-3 gap-3 pt-2 w-full max-w-xl animate-hero-entrance [animation-delay:600ms] opacity-0"
               style={{ animationFillMode: 'forwards' }}
             >
-              <div className="p-3 rounded-xl bg-[#12121A]/80 border border-white/[0.06] backdrop-blur-sm flex flex-col space-y-1">
-                <span className="text-base sm:text-lg font-bold text-white font-mono flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-[#8B5CF6]" /> 3+
+              {/* Stat 1 */}
+              <div className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] flex flex-col space-y-1">
+                <span className="text-base sm:text-lg font-bold text-[#F5F5F7] group-hover/stat:text-white flex items-center gap-1.5 transition-colors">
+                  <CheckCircle2 size={15} className="text-[#8B5CF6]" /> 3+
                 </span>
-                <span className="text-[11px] text-[#A1A1AA] font-mono leading-tight">
+                <span className="text-xs font-medium text-[#A1A1AA] group-hover/stat:text-[#D4D4D8] transition-colors leading-tight">
                   Client Websites
                 </span>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#12121A]/80 border border-white/[0.06] backdrop-blur-sm flex flex-col space-y-1">
-                <span className="text-base sm:text-lg font-bold text-white font-mono flex items-center gap-1.5">
-                  <Code2 size={14} className="text-[#8B5CF6]" /> B.Tech
+              {/* Stat 2 */}
+              <div className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] flex flex-col space-y-1">
+                <span className="text-base sm:text-lg font-bold text-[#F5F5F7] group-hover/stat:text-white flex items-center gap-1.5 transition-colors">
+                  <Code2 size={15} className="text-[#8B5CF6]" /> B.Tech
                 </span>
-                <span className="text-[11px] text-[#A1A1AA] font-mono leading-tight">
+                <span className="text-xs font-medium text-[#A1A1AA] group-hover/stat:text-[#D4D4D8] transition-colors leading-tight">
                   IT @ PPSU (25–28)
                 </span>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#12121A]/80 border border-white/[0.06] backdrop-blur-sm flex flex-col space-y-1">
-                <span className="text-base sm:text-lg font-bold text-white font-mono flex items-center gap-1.5">
-                  <Layers size={14} className="text-[#8B5CF6]" /> Full-Stack
+              {/* Stat 3 */}
+              <div className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] flex flex-col space-y-1">
+                <span className="text-base sm:text-lg font-bold text-[#F5F5F7] group-hover/stat:text-white flex items-center gap-1.5 transition-colors">
+                  <Layers size={15} className="text-[#8B5CF6]" /> Full-Stack
                 </span>
-                <span className="text-[11px] text-[#A1A1AA] font-mono leading-tight">
+                <span className="text-xs font-medium text-[#A1A1AA] group-hover/stat:text-[#D4D4D8] transition-colors leading-tight">
                   Java &amp; MERN Stack
                 </span>
               </div>
