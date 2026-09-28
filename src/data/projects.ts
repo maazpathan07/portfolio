@@ -1,0 +1,40 @@
+import type { ProjectItem } from '../types';
+
+export const PROJECTS: ProjectItem[] = [
+  {
+    id: 'alif-perfume',
+    title: 'Alif Perfume',
+    category: 'E-Commerce & Brand Showcase',
+    isClientProject: true,
+    description: 'A modern, responsive brand website created for a fragrance business to present luxury perfume collections and establish an elegant digital storefront presence.',
+    workflowNote: 'AI-assisted development workflow with custom client requirements, responsive layouts, and Vercel deployment.',
+    technologies: ['Client Website', 'Responsive UI', 'Modern CSS', 'Vercel Deployment'],
+    liveUrl: 'https://alif-perfumes.vercel.app',
+    isPrivateRepo: true,
+    previewGradient: 'from-purple-900/40 via-[#181820] to-[#0B0B0F]',
+  },
+  {
+    id: 'wisteria-trust',
+    title: 'Wisteria Trust',
+    category: 'Organization & Non-Profit Portal',
+    isClientProject: true,
+    description: 'A clean, authoritative online web platform developed for an organization to present community trust initiatives, organizational values, and official information.',
+    workflowNote: 'Created and delivered for a client using an AI-augmented development workflow, custom domain routing, and accessible content structure.',
+    technologies: ['Client Website', 'Custom Domain', 'Accessible Layout', 'Web Platform'],
+    liveUrl: 'https://wisteriatrust.com',
+    isPrivateRepo: true,
+    previewGradient: 'from-violet-950/40 via-[#181820] to-[#0B0B0F]',
+  },
+  {
+    id: 'national-auto-garage',
+    title: 'National Auto Garage',
+    category: 'Automotive Business & Services',
+    isClientProject: true,
+    description: 'A dedicated business website developed for an automotive service garage to present service offerings, operational details, and streamline customer inquiries.',
+    workflowNote: 'Client-focused delivery with touch-friendly inquiry actions, responsive service cards, and cloud hosting.',
+    technologies: ['Client Website', 'Service Showcase', 'Responsive UI', 'Vercel Deployment'],
+    liveUrl: 'https://national-auto-garage.vercel.app',
+    isPrivateRepo: true,
+    previewGradient: 'from-indigo-950/40 via-[#181820] to-[#0B0B0F]',
+  },
+];

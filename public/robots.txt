@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maazpathan.vercel.app/sitemap.xml
