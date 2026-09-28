@@ -43,16 +43,27 @@ export const HeroSection: React.FC = () => {
 
             {/* Main Headline & Display Treatment */}
             <div
-              className="space-y-3 max-w-2xl animate-hero-entrance [animation-delay:200ms] opacity-0"
+              className="space-y-3.5 max-w-2xl animate-hero-entrance [animation-delay:200ms] opacity-0"
               style={{ animationFillMode: 'forwards' }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-extrabold text-[#F5F5F7] tracking-tight leading-[1.08]">
+              {/* Primary High-Impact Greeting with Name */}
+              <h1 className="text-4xl sm:text-6xl lg:text-[66px] font-extrabold text-[#F5F5F7] tracking-tight leading-[1.08]">
+                Hi, I'm{' '}
+                <span className="bg-gradient-to-r from-[#A78BFA] via-[#C084FC] to-[#8B5CF6] bg-clip-text text-transparent underline decoration-[#8B5CF6]/40 decoration-wavy decoration-2 underline-offset-8">
+                  Maaz Pathan
+                </span>
+                <span className="text-[#8B5CF6]">.</span>
+              </h1>
+
+              {/* Sub-headline / Mission Tagline */}
+              <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#D4D4D8] tracking-tight leading-snug">
                 Building ideas into{' '}
                 <span className="bg-gradient-to-r from-white via-[#E2E8F0] to-[#A78BFA] bg-clip-text text-transparent">
                   digital experiences.
                 </span>
-              </h1>
+              </p>
 
+              {/* Terminal Role Eyebrow */}
               <div className="flex items-center gap-2 pt-1 text-xs sm:text-sm font-mono text-[#A78BFA] font-medium tracking-wide">
                 <Terminal size={14} className="text-[#8B5CF6]" />
                 <span>{PROFILE.eyebrow}</span>

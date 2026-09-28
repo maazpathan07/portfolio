@@ -6,7 +6,7 @@ export const PROFILE = {
   title: 'Aspiring Software Engineer & Freelance Web Developer',
   eyebrow: 'ASPIRING SOFTWARE ENGINEER · FREELANCE WEB DEVELOPER',
   tagline: 'Building ideas into digital experiences.',
-  heroBio: "Hi, I'm Maaz Pathan. I'm an Information Technology student and freelance web developer, building modern websites and exploring full-stack development.",
+  heroBio: 'Information Technology student at P P Savani University and freelance web developer, building modern websites and exploring full-stack development.',
   aboutParagraphs: [
     "I'm Maaz Imran Pathan, an Information Technology student at P P Savani University (PPSU), Gujarat, with a foundational background in Computer Engineering and a strong passion for software engineering.",
     "I believe the best way to master modern development is by building real digital products. Through freelance client projects, I have developed and deployed production-ready websites for businesses and organizations, managing everything from interface implementation to live deployment.",
