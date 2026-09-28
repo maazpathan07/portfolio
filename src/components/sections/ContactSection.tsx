@@ -6,8 +6,6 @@ import {
   CheckCircle2,
   AlertCircle,
   MessageSquare,
-  MapPin,
-  Clock,
   Copy,
   Check
 } from 'lucide-react';
@@ -19,6 +17,7 @@ import { Button } from '../ui/Button';
 import { SocialLinks } from '../ui/SocialLinks';
 import { Badge } from '../ui/Badge';
 import { ScrollReveal } from '../ui/ScrollReveal';
+import { LiveStatusClock } from '../ui/LiveStatusClock';
 
 export const ContactSection: React.FC = () => {
   const { formData, errors, status, serverMessage, handleChange, handleSubmit, resetStatus } =
@@ -49,24 +48,24 @@ export const ContactSection: React.FC = () => {
         ========================================================================= */}
         <ScrollReveal
           delay={100}
-          className="lg:col-span-5 flex flex-col justify-between p-7 sm:p-9 rounded-3xl bg-[#13131D]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl space-y-7"
+          className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-[#13131D]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl space-y-6"
         >
-          <div className="space-y-4">
+          <div className="space-y-3.5">
             <div className="flex items-center gap-2">
               <Badge label="Available for Hire" variant="violet" size="sm" dot />
             </div>
 
-            <h3 className="text-2xl font-bold text-[#F5F5F7] tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F7] tracking-tight">
               Get in Touch Directly
             </h3>
 
-            <p className="text-sm text-[#A1A1AA] leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed">
               I am open to full-time software engineering roles and freelance website development for clients in India and worldwide.
             </p>
           </div>
 
           {/* Primary Email Card with Quick Copy Action */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-[#0D0D14] border border-white/[0.06] space-y-2.5">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-[#0D0D14] border border-white/[0.06] space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono text-[#A78BFA] uppercase tracking-wider">
                 Direct Email
@@ -92,31 +91,22 @@ export const ContactSection: React.FC = () => {
 
             <a
               href={`mailto:${PROFILE.email}`}
-              className="flex items-center gap-2.5 text-sm sm:text-base font-semibold text-[#F5F5F7] hover:text-[#8B5CF6] transition-colors break-all"
+              className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#F5F5F7] hover:text-[#8B5CF6] transition-colors break-all"
             >
-              <Mail size={16} className="text-[#8B5CF6]" shrink-0 aria-hidden="true" />
+              <Mail size={15} className="text-[#8B5CF6]" shrink-0 aria-hidden="true" />
               <span>{PROFILE.email}</span>
             </a>
           </div>
 
-          {/* Location & Response Expectation */}
-          <div className="space-y-3 text-xs sm:text-sm text-[#A1A1AA] font-mono">
-            <div className="flex items-center gap-2.5">
-              <MapPin size={15} className="text-[#8B5CF6] shrink-0" />
-              <span>Surat, Gujarat, India (IST)</span>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <Clock size={15} className="text-[#8B5CF6] shrink-0" />
-              <span>Average Response: &lt; 24 Hours</span>
-            </div>
-          </div>
+          {/* 🕒 Live Real-Time Surat Clock & Dynamic Activity Status */}
+          <LiveStatusClock variant="card" />
 
           {/* Professional Networks */}
-          <div className="pt-5 border-t border-white/[0.08] space-y-3">
+          <div className="pt-4 border-t border-white/[0.08] space-y-2.5">
             <span className="text-xs font-mono text-[#71717A] uppercase tracking-wider block">
               Professional Networks:
             </span>
-            <SocialLinks iconSize={18} />
+            <SocialLinks iconSize={17} />
           </div>
         </ScrollReveal>
 
@@ -125,17 +115,17 @@ export const ContactSection: React.FC = () => {
         ========================================================================= */}
         <ScrollReveal
           delay={200}
-          className="lg:col-span-7 flex flex-col justify-between p-7 sm:p-9 rounded-3xl bg-[#14141E]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl"
+          className="lg:col-span-7 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-[#14141E]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl"
         >
           <div>
             {/* Form Card Header */}
-            <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.08]">
+            <div className="flex items-center justify-between pb-5 mb-5 border-b border-white/[0.08]">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center w-10 h-10 rounded-2xl bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-[#A78BFA]">
                   <MessageSquare size={19} />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#F5F5F7] tracking-tight">
+                  <h3 className="text-base sm:text-lg font-bold text-[#F5F5F7] tracking-tight">
                     Send a Direct Message
                   </h3>
                   <p className="text-xs font-mono text-[#A1A1AA]">
@@ -146,7 +136,7 @@ export const ContactSection: React.FC = () => {
             </div>
 
             {/* Status Announcements (aria-live for accessibility) */}
-            <div aria-live="polite" className="mb-6">
+            <div aria-live="polite" className="mb-5">
               {status === 'success' && (
                 <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-start gap-3">
                   <CheckCircle2 size={20} className="shrink-0 mt-0.5 text-emerald-400" aria-hidden="true" />
@@ -181,7 +171,7 @@ export const ContactSection: React.FC = () => {
             </div>
 
             {/* Interactive Form */}
-            <form onSubmit={handleSubmit} noValidate className="space-y-4">
+            <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
               {/* Honeypot Spam Prevention Field (Hidden from humans) */}
               <input
                 type="checkbox"
@@ -212,7 +202,7 @@ export const ContactSection: React.FC = () => {
                   aria-required="true"
                   aria-invalid={!!errors.fullName}
                   aria-describedby={errors.fullName ? 'fullName-error' : undefined}
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0D0D14] border text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6] ${
+                  className={`w-full px-4 py-2.5 rounded-xl bg-[#0D0D14] border text-xs sm:text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6] ${
                     errors.fullName ? 'border-rose-500' : 'border-white/10 hover:border-white/20'
                   }`}
                 />
@@ -242,7 +232,7 @@ export const ContactSection: React.FC = () => {
                   aria-required="true"
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? 'email-error' : undefined}
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0D0D14] border text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6] ${
+                  className={`w-full px-4 py-2.5 rounded-xl bg-[#0D0D14] border text-xs sm:text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6] ${
                     errors.email ? 'border-rose-500' : 'border-white/10 hover:border-white/20'
                   }`}
                 />
@@ -269,7 +259,7 @@ export const ContactSection: React.FC = () => {
                   onChange={handleChange}
                   disabled={isSubmitting}
                   placeholder="Project inquiry / Engineering role"
-                  className="w-full px-4 py-3 rounded-xl bg-[#0D0D14] border border-white/10 hover:border-white/20 text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6]"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#0D0D14] border border-white/10 hover:border-white/20 text-xs sm:text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6]"
                 />
               </div>
 
@@ -292,7 +282,7 @@ export const ContactSection: React.FC = () => {
                   aria-required="true"
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? 'message-error' : undefined}
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0D0D14] border text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6] resize-y min-h-[110px] ${
+                  className={`w-full px-4 py-2.5 rounded-xl bg-[#0D0D14] border text-xs sm:text-sm text-[#F5F5F7] placeholder-[#71717A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:border-[#8B5CF6] resize-y min-h-[100px] ${
                     errors.message ? 'border-rose-500' : 'border-white/10 hover:border-white/20'
                   }`}
                 />
@@ -304,7 +294,7 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {/* Submit CTA Button */}
-              <div className="pt-2">
+              <div className="pt-1.5">
                 <Button
                   type="submit"
                   variant="primary"

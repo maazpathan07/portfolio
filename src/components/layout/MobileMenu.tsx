@@ -17,6 +17,7 @@ import { NAV_LINKS } from '../../data/navigation';
 import { PROFILE } from '../../data/profile';
 import { SocialLinks } from '../ui/SocialLinks';
 import { Button } from '../ui/Button';
+import { LiveStatusClock } from '../ui/LiveStatusClock';
 import profilePhoto from '../../assets/images/profile-portrait.jpg';
 
 interface MobileMenuProps {
@@ -120,9 +121,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeI
         </div>
 
         {/* Navigation Items (Staggered List with Micro-Icons & Numbers) */}
-        <nav className="flex flex-col py-4 space-y-1.5 overflow-y-auto flex-1 my-auto scrollbar-none">
-          <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-[#71717A]">
-            Menu
+        <nav className="flex flex-col py-3.5 space-y-1.5 overflow-y-auto flex-1 my-auto scrollbar-none">
+          <div className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#71717A]">
+            Navigation
           </div>
           {NAV_LINKS.map((link, idx) => {
             const isActive = activeId === link.id;
@@ -171,16 +172,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, activeI
           })}
         </nav>
 
-        {/* Footer Area with Action & Socials */}
-        <div className="pt-4 border-t border-white/[0.08] space-y-3.5">
-          {/* Status Badge */}
-          <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs">
-            <span className="flex items-center gap-2 text-emerald-400 font-medium text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Open for Freelance & Roles
-            </span>
-            <span className="text-[10px] font-mono text-emerald-500/80">Available</span>
-          </div>
+        {/* Footer Area with Live Clock, Action & Socials */}
+        <div className="pt-3.5 border-t border-white/[0.08] space-y-3">
+          {/* Live Surat Clock & Status in Drawer */}
+          <LiveStatusClock variant="compact" className="w-full justify-center text-[11px]" />
 
           {/* Primary Action Button */}
           <Button
