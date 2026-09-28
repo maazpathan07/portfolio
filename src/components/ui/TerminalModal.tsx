@@ -7,6 +7,9 @@ import {
   Sparkles,
   Send,
   ExternalLink,
+  ShieldCheck,
+  Calendar,
+  Briefcase,
 } from 'lucide-react';
 import { PROFILE } from '../../data/profile';
 import { PROJECTS } from '../../data/projects';
@@ -33,6 +36,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
 
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalEndRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize welcome banner
   useEffect(() => {
@@ -47,7 +51,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
                 ⚡ Welcome to Maaz Pathan's Interactive Shell (maaz.sh v1.0)
               </p>
               <p className="text-[#A1A1AA] text-xs">
-                Type <span className="text-emerald-400 font-bold">'help'</span> to see all available commands, or click the quick pills below.
+                Type <span className="text-emerald-400 font-bold">'help'</span> to view available system commands, or click the quick command chips below.
               </p>
             </div>
           ),
@@ -85,6 +89,97 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
     }
   }, [history, isOpen]);
 
+  // 60FPS High-Tech Canvas Particle Physics System (Fluid celebration burst that disappears cleanly)
+  useEffect(() => {
+    if (!showConfetti) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#8B5CF6', '#A78BFA', '#10B981', '#34D399', '#F59E0B', '#C084FC', '#38BDF8'];
+    const particleCount = 85;
+
+    interface Particle {
+      x: number;
+      y: number;
+      w: number;
+      h: number;
+      vx: number;
+      vy: number;
+      tilt: number;
+      tiltAngle: number;
+      tiltAngleInc: number;
+      color: string;
+      opacity: number;
+    }
+
+    const particles: Particle[] = Array.from({ length: particleCount }).map(() => ({
+      x: canvas.width / 2 + (Math.random() - 0.5) * 220,
+      y: canvas.height * 0.45,
+      w: Math.random() * 8 + 4,
+      h: Math.random() * 6 + 3,
+      vx: (Math.random() - 0.5) * 14,
+      vy: -(Math.random() * 12 + 6),
+      tilt: Math.random() * 10 - 10,
+      tiltAngle: Math.random() * Math.PI,
+      tiltAngleInc: Math.random() * 0.08 + 0.03,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      opacity: 1,
+    }));
+
+    let animationId: number;
+    const startTime = Date.now();
+
+    const render = () => {
+      const elapsed = Date.now() - startTime;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      let activeParticles = 0;
+
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.28; // gravity
+        p.vx *= 0.985; // air resistance
+        p.tiltAngle += p.tiltAngleInc;
+        p.tilt = Math.sin(p.tiltAngle) * 12;
+
+        if (elapsed > 1800) {
+          p.opacity = Math.max(0, p.opacity - 0.025);
+        }
+
+        if (p.opacity > 0 && p.y < canvas.height + 50) {
+          activeParticles++;
+          ctx.save();
+          ctx.globalAlpha = p.opacity;
+          ctx.fillStyle = p.color;
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.tiltAngle * 0.4);
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        }
+      });
+
+      if (activeParticles > 0 && elapsed < 3200) {
+        animationId = requestAnimationFrame(render);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        setShowConfetti(false);
+      }
+    };
+
+    animationId = requestAnimationFrame(render);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, [showConfetti]);
+
   // Execute terminal command
   const executeCommand = (cmdText: string) => {
     const trimmed = cmdText.trim().toLowerCase();
@@ -111,7 +206,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
               <div><span className="text-emerald-400 font-bold">education</span> - B.Tech IT & Diploma qualifications</div>
               <div><span className="text-emerald-400 font-bold">contact</span> - Direct email & contact info</div>
               <div><span className="text-emerald-400 font-bold">socials</span> - GitHub, LinkedIn, Instagram links</div>
-              <div><span className="text-emerald-400 font-bold">sudo hire-maaz</span> - 🎉 Hire command with celebratory burst</div>
+              <div><span className="text-emerald-400 font-bold">sudo hire-maaz</span> - 🏆 Hire command & executive dossier</div>
               <div><span className="text-emerald-400 font-bold">clear</span> - Clear terminal history</div>
               <div><span className="text-emerald-400 font-bold">exit</span> - Close terminal window</div>
             </div>
@@ -151,7 +246,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
       case 'projects':
         outputNode = (
           <div className="space-y-2 text-xs">
-            <p className="text-[#A78BFA] font-bold">FEATURED CLIENT WEBSITES (ALL WITH CUSTOM ADMIN PANELS):</p>
+            <p className="text-[#A78BFA] font-bold">FEATURED CLIENT WEBSITES (WITH CUSTOM ADMIN PANELS):</p>
             <div className="space-y-1.5">
               {PROJECTS.map((proj) => (
                 <div key={proj.id} className="p-2 rounded-lg bg-[#141420] border border-white/10 flex items-center justify-between">
@@ -234,30 +329,57 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
       case 'hire-maaz':
       case 'hire':
         setShowConfetti(true);
-        setTimeout(() => setShowConfetti(false), 5000);
         outputNode = (
-          <div className="p-3.5 rounded-xl bg-gradient-to-r from-[#8B5CF6]/30 via-emerald-500/20 to-[#8B5CF6]/30 border border-[#8B5CF6]/50 space-y-2 text-xs">
-            <div className="flex items-center gap-2 text-sm font-bold text-white">
-              <Sparkles size={16} className="text-amber-400 animate-spin" />
-              <span>🎉 SUCCESS! Let's Build Something Great Together!</span>
+          <div className="p-4 rounded-2xl bg-gradient-to-br from-[#181828] via-[#12121E] to-[#0D0D16] border border-[#8B5CF6]/50 shadow-[0_0_30px_rgba(139,92,246,0.25)] space-y-3">
+            {/* System Clearance Header */}
+            <div className="flex items-center justify-between pb-2.5 border-b border-white/10">
+              <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
+                <ShieldCheck size={14} className="text-emerald-400 animate-pulse" />
+                <span>ROOT CLEARANCE GRANTED</span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
+                AVAILABLE TO HIRE
+              </span>
             </div>
-            <p className="text-[#E2E8F0]">
-              Thank you for considering Maaz Pathan! Open for full-time software engineering roles and freelance client projects.
-            </p>
-            <div className="pt-1 flex items-center gap-2">
+
+            {/* Candidate Executive Summary */}
+            <div className="space-y-1 text-xs">
+              <h4 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+                <span>Maaz Pathan — Software Engineer & Web Developer</span>
+                <Sparkles size={13} className="text-[#A78BFA]" />
+              </h4>
+              <p className="text-[#A1A1AA] leading-relaxed text-[11px]">
+                Ready for full-time engineering roles, remote teams, and freelance client website builds with custom admin dashboards.
+              </p>
+            </div>
+
+            {/* Micro Highlights */}
+            <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
+              <div className="p-2 rounded-xl bg-[#09090F] border border-white/5 flex items-center gap-2 text-[#E2E8F0]">
+                <Briefcase size={12} className="text-[#8B5CF6]" />
+                <span>3+ Live Websites</span>
+              </div>
+              <div className="p-2 rounded-xl bg-[#09090F] border border-white/5 flex items-center gap-2 text-[#E2E8F0]">
+                <Calendar size={12} className="text-[#8B5CF6]" />
+                <span>B.Tech IT @ PPSU</span>
+              </div>
+            </div>
+
+            {/* Direct 1-Click Action Buttons */}
+            <div className="pt-1 flex flex-wrap items-center gap-2">
               <a
                 href="#contact"
                 onClick={onClose}
-                className="px-3 py-1 rounded-lg bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-bold text-xs flex items-center gap-1.5 transition-colors"
+                className="px-3.5 py-1.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-bold text-xs flex items-center gap-1.5 shadow-[0_0_15px_rgba(139,92,246,0.4)] transition-all active:scale-95"
               >
                 <Send size={11} />
-                <span>Open Contact Form</span>
+                <span>Start Project Discussion</span>
               </a>
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs transition-colors"
+                className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white text-xs font-medium transition-all"
               >
-                Send Email Directly
+                Direct Email ({PROFILE.email})
               </a>
             </div>
           </div>
@@ -354,23 +476,12 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
         aria-hidden="true"
       />
 
-      {/* Confetti Particles (CSS based, lightweight) */}
+      {/* 60FPS Fluid Physics Canvas Celebration Particle Stream (vanishes smoothly, zero leftover bubbles) */}
       {showConfetti && (
-        <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
-          {Array.from({ length: 40 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-2.5 h-2.5 rounded-sm animate-bounce"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 50}%`,
-                backgroundColor: ['#8B5CF6', '#10B981', '#F59E0B', '#EC4899', '#3B82F6'][i % 5],
-                transform: `rotate(${Math.random() * 360}deg)`,
-                animationDuration: `${1 + Math.random() * 2}s`,
-              }}
-            />
-          ))}
-        </div>
+        <canvas
+          ref={canvasRef}
+          className="fixed inset-0 pointer-events-none z-[60] w-full h-full"
+        />
       )}
 
       {/* Terminal Window */}
