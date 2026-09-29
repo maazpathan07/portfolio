@@ -12,16 +12,25 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
   triggerOnce = true,
 }: UseIntersectionOptions = {}) {
   const elementRef = useRef<T | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window !== 'undefined') {
+      if (
+        typeof IntersectionObserver === 'undefined' ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
 
   useEffect(() => {
-    // If IntersectionObserver is unavailable or reduced motion is preferred, show immediately
+    // If already visible under reduced motion/unsupported, skip observer
     if (
       typeof window === 'undefined' ||
       typeof IntersectionObserver === 'undefined' ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
-      setIsVisible(true);
       return;
     }
 

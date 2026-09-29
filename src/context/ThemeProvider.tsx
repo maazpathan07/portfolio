@@ -1,14 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ThemeContext } from './ThemeContext';
 import type { AccentTheme } from '../types/theme';
 
-interface ThemeContextType {
-  theme: AccentTheme;
-  setTheme: (theme: AccentTheme) => void;
-}
-
 const STORAGE_KEY = 'maaz_portfolio_accent_theme';
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<AccentTheme>(() => {
@@ -42,12 +36,4 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       {children}
     </ThemeContext.Provider>
   );
-};
-
-export const useAccentTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useAccentTheme must be used within a ThemeProvider');
-  }
-  return context;
 };

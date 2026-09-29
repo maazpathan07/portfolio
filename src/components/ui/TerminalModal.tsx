@@ -15,7 +15,7 @@ import {
 import { PROFILE } from '../../data/profile';
 import { PROJECTS } from '../../data/projects';
 import { SKILL_CATEGORIES } from '../../data/skills';
-import { useAccentTheme } from '../../context/ThemeContext';
+import { useAccentTheme } from '../../hooks/useAccentTheme';
 import { THEME_OPTIONS, type AccentTheme } from '../../types/theme';
 
 interface TerminalModalProps {
@@ -32,7 +32,22 @@ interface CommandHistoryItem {
 export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose }) => {
   const { theme, setTheme } = useAccentTheme();
   const [inputVal, setInputVal] = useState('');
-  const [history, setHistory] = useState<CommandHistoryItem[]>([]);
+  const [history, setHistory] = useState<CommandHistoryItem[]>(() => [
+    {
+      command: 'init',
+      timestamp: new Date().toLocaleTimeString(),
+      output: (
+        <div className="space-y-2 text-[#DDD6FE]">
+          <p className="font-bold text-[#A78BFA]">
+            ⚡ Welcome to Maaz Pathan's Interactive Shell (maaz.sh v1.0)
+          </p>
+          <p className="text-[#A1A1AA] text-xs">
+            Type <span className="text-emerald-400 font-bold">'help'</span> to view available system commands, or click the quick command chips below.
+          </p>
+        </div>
+      ),
+    },
+  ]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
   const [isMaximized, setIsMaximized] = useState(false);
@@ -41,28 +56,6 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalEndRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Initialize welcome banner
-  useEffect(() => {
-    if (history.length === 0) {
-      setHistory([
-        {
-          command: 'init',
-          timestamp: new Date().toLocaleTimeString(),
-          output: (
-            <div className="space-y-2 text-[#DDD6FE]">
-              <p className="font-bold text-[#A78BFA]">
-                ⚡ Welcome to Maaz Pathan's Interactive Shell (maaz.sh v1.0)
-              </p>
-              <p className="text-[#A1A1AA] text-xs">
-                Type <span className="text-emerald-400 font-bold">'help'</span> to view available system commands, or click the quick command chips below.
-              </p>
-            </div>
-          ),
-        },
-      ]);
-    }
-  }, [history.length]);
 
   // Handle auto-focus and body scroll lock
   useEffect(() => {

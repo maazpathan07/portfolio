@@ -5,7 +5,7 @@ import { PROFILE } from '../../data/profile';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { MobileMenu } from './MobileMenu';
 import { TerminalModal } from '../ui/TerminalModal';
-import { useAccentTheme } from '../../context/ThemeContext';
+import { useAccentTheme } from '../../hooks/useAccentTheme';
 import { THEME_OPTIONS } from '../../types/theme';
 import profilePhoto from '../../assets/images/profile-portrait.jpg';
 

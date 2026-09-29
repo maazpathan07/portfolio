@@ -11,7 +11,7 @@ import { LearningSection } from './components/sections/LearningSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { ScrollToTop } from './components/ui/ScrollToTop';
 import { ThemeSwitcher } from './components/ui/ThemeSwitcher';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider } from './context/ThemeProvider';
 
 export const App: React.FC = () => {
   return (

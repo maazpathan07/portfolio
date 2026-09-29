@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Palette, Check, Sparkles } from 'lucide-react';
-import { useAccentTheme } from '../../context/ThemeContext';
+import { useAccentTheme } from '../../hooks/useAccentTheme';
 import { THEME_OPTIONS } from '../../types/theme';
 
 export const ThemeSwitcher: React.FC = () => {
