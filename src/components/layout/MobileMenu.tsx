@@ -12,15 +12,12 @@ import {
   Briefcase,
   GraduationCap,
   BookOpen,
-  Terminal as TerminalIcon,
 } from 'lucide-react';
 import { NAV_LINKS } from '../../data/navigation';
 import { PROFILE } from '../../data/profile';
 import { SocialLinks } from '../ui/SocialLinks';
 import { Button } from '../ui/Button';
 import { LiveStatusClock } from '../ui/LiveStatusClock';
-import { useAccentTheme } from '../../context/ThemeContext';
-import { THEME_OPTIONS } from '../../types/theme';
 import profilePhoto from '../../assets/images/profile-portrait.jpg';
 
 interface MobileMenuProps {
@@ -45,10 +42,8 @@ const NAV_ICONS: Record<string, React.ElementType> = {
 export const MobileMenu: React.FC<MobileMenuProps> = ({
   isOpen,
   onClose,
-  onOpenTerminal,
   activeId,
 }) => {
-  const { theme, setTheme } = useAccentTheme();
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -182,46 +177,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           })}
         </nav>
 
-        {/* Footer Area with Theme Selector, Live Clock, Terminal, Action & Socials */}
+        {/* Footer Area with Live Clock, Action & Socials */}
         <div className="pt-3.5 border-t border-white/[0.08] space-y-2.5">
-          {/* Mobile Theme Palette Selector Row */}
-          <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-[#141422] border border-white/[0.08]">
-            <span className="text-[11px] font-mono text-[#A1A1AA] flex items-center gap-1.5">
-              <span>🎨</span> Accent:
-            </span>
-            <div className="flex items-center gap-2">
-              {THEME_OPTIONS.map((opt) => (
-                <button
-                  key={opt.id}
-                  onClick={() => setTheme(opt.id)}
-                  title={opt.name}
-                  aria-label={`Switch to ${opt.name} theme`}
-                  className={`w-6 h-6 rounded-full transition-all duration-200 flex items-center justify-center ${
-                    theme === opt.id
-                      ? 'scale-110 ring-2 ring-white/60 shadow-[0_0_10px_rgba(255,255,255,0.3)]'
-                      : 'opacity-60 hover:opacity-100 hover:scale-105'
-                  }`}
-                  style={{ backgroundColor: opt.color }}
-                >
-                  {theme === opt.id && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* Live Surat Clock & Status in Drawer */}
           <LiveStatusClock variant="compact" className="w-full justify-center text-[11px]" />
-
-          {/* Quick Terminal Launch Button (maaz.sh) */}
-          {onOpenTerminal && (
-            <button
-              onClick={onOpenTerminal}
-              className="w-full py-2 px-3 rounded-xl bg-[#141422] hover:bg-[#1E1E32] border border-[#8B5CF6]/30 text-xs font-mono text-[#DDD6FE] flex items-center justify-center gap-2 transition-colors active:scale-98"
-            >
-              <TerminalIcon size={13} className="text-[#8B5CF6]" />
-              <span>Launch Terminal (maaz.sh)</span>
-            </button>
-          )}
 
           {/* Primary Action Button */}
           <Button
