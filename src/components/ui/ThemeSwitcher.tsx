@@ -40,7 +40,7 @@ export const ThemeSwitcher: React.FC = () => {
     >
       {/* Expanded Theme Selection Popup */}
       <div
-        className={`absolute bottom-full left-0 mb-3 w-64 p-3 rounded-2xl bg-[#12121A]/95 border border-white/10 backdrop-blur-2xl shadow-[0_16px_36px_rgba(0,0,0,0.6),0_0_24px_rgba(139,92,246,0.15)] transition-all duration-300 origin-bottom-left ${
+        className={`absolute bottom-full left-0 mb-3 w-60 p-3 rounded-2xl bg-[#12121A]/95 border border-white/10 backdrop-blur-2xl shadow-[0_16px_36px_rgba(0,0,0,0.6),0_0_24px_rgba(139,92,246,0.15)] transition-all duration-300 origin-bottom-left ${
           isOpen
             ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 scale-90 translate-y-3 pointer-events-none'
@@ -68,8 +68,7 @@ export const ThemeSwitcher: React.FC = () => {
                 type="button"
                 onClick={() => {
                   setTheme(opt.id);
-                  // Brief pause then close for smooth feel
-                  setTimeout(() => setIsOpen(false), 180);
+                  setTimeout(() => setIsOpen(false), 160);
                 }}
                 className={`w-full flex items-center justify-between p-2 rounded-xl text-left transition-all duration-200 group ${
                   isSelected
@@ -117,34 +116,33 @@ export const ThemeSwitcher: React.FC = () => {
         </div>
       </div>
 
-      {/* Trigger Floating Capsule Button */}
+      {/* Trigger Compact Circular Floating Button (Chhota Circle) */}
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
-        aria-label="Open portfolio accent theme switcher"
-        className="group relative flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-[#12121A]/90 hover:bg-[#1A1A26] border border-white/10 hover:border-white/20 backdrop-blur-xl text-[#A1A1AA] hover:text-white shadow-[0_8px_24px_rgba(0,0,0,0.5)] transition-all duration-300 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+        aria-label="Toggle accent color theme switcher"
+        title={`Change Theme (Current: ${activeOption.name})`}
+        className="group relative flex items-center justify-center w-11 h-11 rounded-full bg-[#12121A]/90 hover:bg-[#1A1A26] border border-white/10 hover:border-white/25 backdrop-blur-xl text-[#A1A1AA] hover:text-white shadow-[0_8px_24px_rgba(0,0,0,0.5)] transition-all duration-300 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
       >
-        {/* Dynamic Color Ring Swatches */}
-        <div className="flex items-center -space-x-1.5">
-          {THEME_OPTIONS.map((opt) => (
-            <span
-              key={opt.id}
-              className={`w-3.5 h-3.5 rounded-full border border-[#0B0B0F] transition-all duration-300 ${
-                theme === opt.id
-                  ? 'scale-125 z-10 ring-2 ring-white/40 shadow-sm'
-                  : 'opacity-70 group-hover:opacity-100'
-              }`}
-              style={{ backgroundColor: opt.color }}
-            />
-          ))}
-        </div>
+        {/* Dynamic Glowing Accent Halo */}
+        <span
+          className="absolute inset-0 rounded-full opacity-20 group-hover:opacity-40 transition-opacity blur-[6px]"
+          style={{ backgroundColor: activeOption.color }}
+        />
 
-        {/* Text Label & Icon */}
-        <span className="text-xs font-semibold text-[#E2E8F0] group-hover:text-white transition-colors flex items-center gap-1.5">
-          <Palette size={12} style={{ color: activeOption.color }} className="transition-colors" />
-          <span className="hidden sm:inline">{activeOption.name}</span>
-        </span>
+        {/* Small Active Color Indicator Corner Dot */}
+        <span
+          className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full border-2 border-[#12121A] transition-all duration-300 z-10"
+          style={{ backgroundColor: activeOption.color }}
+        />
+
+        {/* Palette Icon */}
+        <Palette
+          size={17}
+          style={{ color: activeOption.color }}
+          className="relative z-10 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+        />
       </button>
     </div>
   );
