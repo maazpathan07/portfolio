@@ -10,10 +10,13 @@ import { EducationSection } from './components/sections/EducationSection';
 import { LearningSection } from './components/sections/LearningSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { ScrollToTop } from './components/ui/ScrollToTop';
+import { ThemeSwitcher } from './components/ui/ThemeSwitcher';
+import { ThemeProvider } from './context/ThemeContext';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#0B0B0F] text-[#F5F5F7] flex flex-col selection:bg-[#8B5CF6]/30 selection:text-white relative">
+    <ThemeProvider>
+      <div className="min-h-screen bg-[#0B0B0F] text-[#F5F5F7] flex flex-col selection:bg-[#8B5CF6]/30 selection:text-white relative">
       {/* Accessible Skip to Main Content Link */}
       <a
         href="#main-content"
@@ -40,10 +43,14 @@ export const App: React.FC = () => {
       {/* Minimal Footer */}
       <Footer />
 
+      {/* Floating Accent Color Theme Switcher */}
+      <ThemeSwitcher />
+
       {/* Floating Circular Scroll-To-Top Indicator */}
       <ScrollToTop />
     </div>
-  );
+  </ThemeProvider>
+);
 };
 
 export default App;

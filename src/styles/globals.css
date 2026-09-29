@@ -12,6 +12,7 @@
     background-color: var(--bg-primary);
     color-scheme: dark;
     scroll-behavior: smooth;
+    transition: color 0.3s ease, background-color 0.3s ease;
   }
 
   section {
@@ -23,7 +24,7 @@
   }
 
   ::selection {
-    background-color: rgba(139, 92, 246, 0.35);
+    background-color: var(--glow-accent);
     color: #FFFFFF;
   }
 
@@ -42,7 +43,7 @@
     transition: background 0.3s ease;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #8B5CF6;
+    background: var(--accent-primary);
   }
 }
 
@@ -96,14 +97,300 @@
 .text-content-secondary { color: var(--text-secondary); }
 .text-content-muted { color: var(--text-muted); }
 
-.text-brand-violet { color: var(--accent-violet); }
+.text-brand-violet { color: var(--accent-primary); }
 .text-brand-light { color: var(--accent-light); }
-.bg-brand-violet { background-color: var(--accent-violet); }
+.bg-brand-violet { background-color: var(--accent-primary); }
 
 .border-subtle { border-color: var(--border-subtle); }
 .border-hover { border-color: var(--border-hover); }
 .border-input { border-color: var(--border-input); }
 
 .glow-ambient {
-  background: radial-gradient(circle at 50% 50%, var(--glow-violet) 0%, rgba(11, 11, 15, 0) 70%);
+  background: radial-gradient(circle at 50% 50%, var(--glow-accent) 0%, rgba(11, 11, 15, 0) 70%);
 }
+
+/* =========================================================================
+   DYNAMIC ACCENT THEME OVERRIDES (Emerald, Cyan, Amber)
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. Matrix Emerald Theme (🟢)
+   ------------------------------------------------------------------------- */
+html[data-accent="emerald"] {
+  --focus-ring: #10B981;
+}
+
+html[data-accent="emerald"] ::selection {
+  background-color: rgba(16, 185, 129, 0.35);
+}
+
+html[data-accent="emerald"] ::-webkit-scrollbar-thumb:hover {
+  background: #10B981;
+}
+
+html[data-accent="emerald"] .text-\[\#8B5CF6\],
+html[data-accent="emerald"] .text-violet-500,
+html[data-accent="emerald"] .text-violet-600 {
+  color: #10B981 !important;
+}
+
+html[data-accent="emerald"] .text-\[\#A78BFA\],
+html[data-accent="emerald"] .text-\[\#C084FC\],
+html[data-accent="emerald"] .text-\[\#C4B5FD\],
+html[data-accent="emerald"] .text-violet-400 {
+  color: #34D399 !important;
+}
+
+html[data-accent="emerald"] .bg-\[\#8B5CF6\],
+html[data-accent="emerald"] .bg-violet-600 {
+  background-color: #10B981 !important;
+}
+
+html[data-accent="emerald"] .hover\:bg-\[\#7C3AED\]:hover,
+html[data-accent="emerald"] .hover\:bg-\[\#8B5CF6\]:hover {
+  background-color: #059669 !important;
+}
+
+html[data-accent="emerald"] .bg-\[\#8B5CF6\]\/08,
+html[data-accent="emerald"] .bg-\[\#8B5CF6\]\/10,
+html[data-accent="emerald"] .bg-\[\#8B5CF6\]\/15,
+html[data-accent="emerald"] .bg-\[\#8B5CF6\]\/20,
+html[data-accent="emerald"] .bg-\[\#8B5CF6\]\/25,
+html[data-accent="emerald"] .bg-\[\#8B5CF6\]\/30 {
+  background-color: rgba(16, 185, 129, 0.16) !important;
+}
+
+html[data-accent="emerald"] .border-\[\#8B5CF6\],
+html[data-accent="emerald"] .border-\[\#8B5CF6\]\/20,
+html[data-accent="emerald"] .border-\[\#8B5CF6\]\/30,
+html[data-accent="emerald"] .border-\[\#8B5CF6\]\/40,
+html[data-accent="emerald"] .border-\[\#8B5CF6\]\/50,
+html[data-accent="emerald"] .border-\[\#8B5CF6\]\/60 {
+  border-color: rgba(16, 185, 129, 0.45) !important;
+}
+
+html[data-accent="emerald"] .hover\:border-\[\#8B5CF6\]\/40:hover,
+html[data-accent="emerald"] .hover\:border-\[\#8B5CF6\]\/50:hover,
+html[data-accent="emerald"] .hover\:border-\[\#8B5CF6\]\/60:hover,
+html[data-accent="emerald"] .hover\:border-\[\#8B5CF6\]:hover,
+html[data-accent="emerald"] .group:hover .group-hover\:border-\[\#8B5CF6\]\/60,
+html[data-accent="emerald"] .group\/stat:hover {
+  border-color: rgba(16, 185, 129, 0.55) !important;
+}
+
+html[data-accent="emerald"] .from-\[\#8B5CF6\],
+html[data-accent="emerald"] .from-\[\#A78BFA\] {
+  --tw-gradient-from: #10B981 var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(16, 185, 129, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
+}
+
+html[data-accent="emerald"] .via-\[\#7C3AED\],
+html[data-accent="emerald"] .via-\[\#C084FC\],
+html[data-accent="emerald"] .via-\[\#A78BFA\] {
+  --tw-gradient-to: rgba(5, 150, 105, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #059669 var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+html[data-accent="emerald"] .to-\[\#8B5CF6\] {
+  --tw-gradient-to: #10B981 var(--tw-gradient-to-position) !important;
+}
+
+html[data-accent="emerald"] .from-\[\#8B5CF6\]\/20 {
+  --tw-gradient-from: rgba(16, 185, 129, 0.22) var(--tw-gradient-from-position) !important;
+}
+
+html[data-accent="emerald"] .decoration-\[\#8B5CF6\]\/40 {
+  text-decoration-color: rgba(16, 185, 129, 0.5) !important;
+}
+
+html[data-accent="emerald"] #scrollProgressGradient stop:first-child { stop-color: #10B981; }
+html[data-accent="emerald"] #scrollProgressGradient stop:last-child { stop-color: #34D399; }
+
+/* -------------------------------------------------------------------------
+   2. Cyber Cyan Theme (🔵)
+   ------------------------------------------------------------------------- */
+html[data-accent="cyan"] {
+  --focus-ring: #06B6D4;
+}
+
+html[data-accent="cyan"] ::selection {
+  background-color: rgba(6, 182, 212, 0.35);
+}
+
+html[data-accent="cyan"] ::-webkit-scrollbar-thumb:hover {
+  background: #06B6D4;
+}
+
+html[data-accent="cyan"] .text-\[\#8B5CF6\],
+html[data-accent="cyan"] .text-violet-500,
+html[data-accent="cyan"] .text-violet-600 {
+  color: #06B6D4 !important;
+}
+
+html[data-accent="cyan"] .text-\[\#A78BFA\],
+html[data-accent="cyan"] .text-\[\#C084FC\],
+html[data-accent="cyan"] .text-\[\#C4B5FD\],
+html[data-accent="cyan"] .text-violet-400 {
+  color: #22D3EE !important;
+}
+
+html[data-accent="cyan"] .bg-\[\#8B5CF6\],
+html[data-accent="cyan"] .bg-violet-600 {
+  background-color: #06B6D4 !important;
+}
+
+html[data-accent="cyan"] .hover\:bg-\[\#7C3AED\]:hover,
+html[data-accent="cyan"] .hover\:bg-\[\#8B5CF6\]:hover {
+  background-color: #0891B2 !important;
+}
+
+html[data-accent="cyan"] .bg-\[\#8B5CF6\]\/08,
+html[data-accent="cyan"] .bg-\[\#8B5CF6\]\/10,
+html[data-accent="cyan"] .bg-\[\#8B5CF6\]\/15,
+html[data-accent="cyan"] .bg-\[\#8B5CF6\]\/20,
+html[data-accent="cyan"] .bg-\[\#8B5CF6\]\/25,
+html[data-accent="cyan"] .bg-\[\#8B5CF6\]\/30 {
+  background-color: rgba(6, 182, 212, 0.16) !important;
+}
+
+html[data-accent="cyan"] .border-\[\#8B5CF6\],
+html[data-accent="cyan"] .border-\[\#8B5CF6\]\/20,
+html[data-accent="cyan"] .border-\[\#8B5CF6\]\/30,
+html[data-accent="cyan"] .border-\[\#8B5CF6\]\/40,
+html[data-accent="cyan"] .border-\[\#8B5CF6\]\/50,
+html[data-accent="cyan"] .border-\[\#8B5CF6\]\/60 {
+  border-color: rgba(6, 182, 212, 0.45) !important;
+}
+
+html[data-accent="cyan"] .hover\:border-\[\#8B5CF6\]\/40:hover,
+html[data-accent="cyan"] .hover\:border-\[\#8B5CF6\]\/50:hover,
+html[data-accent="cyan"] .hover\:border-\[\#8B5CF6\]\/60:hover,
+html[data-accent="cyan"] .hover\:border-\[\#8B5CF6\]:hover,
+html[data-accent="cyan"] .group:hover .group-hover\:border-\[\#8B5CF6\]\/60,
+html[data-accent="cyan"] .group\/stat:hover {
+  border-color: rgba(6, 182, 212, 0.55) !important;
+}
+
+html[data-accent="cyan"] .from-\[\#8B5CF6\],
+html[data-accent="cyan"] .from-\[\#A78BFA\] {
+  --tw-gradient-from: #06B6D4 var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(6, 182, 212, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
+}
+
+html[data-accent="cyan"] .via-\[\#7C3AED\],
+html[data-accent="cyan"] .via-\[\#C084FC\],
+html[data-accent="cyan"] .via-\[\#A78BFA\] {
+  --tw-gradient-to: rgba(8, 145, 178, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #0891B2 var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+html[data-accent="cyan"] .to-\[\#8B5CF6\] {
+  --tw-gradient-to: #06B6D4 var(--tw-gradient-to-position) !important;
+}
+
+html[data-accent="cyan"] .from-\[\#8B5CF6\]\/20 {
+  --tw-gradient-from: rgba(6, 182, 212, 0.22) var(--tw-gradient-from-position) !important;
+}
+
+html[data-accent="cyan"] .decoration-\[\#8B5CF6\]\/40 {
+  text-decoration-color: rgba(6, 182, 212, 0.5) !important;
+}
+
+html[data-accent="cyan"] #scrollProgressGradient stop:first-child { stop-color: #06B6D4; }
+html[data-accent="cyan"] #scrollProgressGradient stop:last-child { stop-color: #22D3EE; }
+
+/* -------------------------------------------------------------------------
+   3. Sunset Amber Theme (🟠)
+   ------------------------------------------------------------------------- */
+html[data-accent="amber"] {
+  --focus-ring: #F59E0B;
+}
+
+html[data-accent="amber"] ::selection {
+  background-color: rgba(245, 158, 11, 0.35);
+}
+
+html[data-accent="amber"] ::-webkit-scrollbar-thumb:hover {
+  background: #F59E0B;
+}
+
+html[data-accent="amber"] .text-\[\#8B5CF6\],
+html[data-accent="amber"] .text-violet-500,
+html[data-accent="amber"] .text-violet-600 {
+  color: #F59E0B !important;
+}
+
+html[data-accent="amber"] .text-\[\#A78BFA\],
+html[data-accent="amber"] .text-\[\#C084FC\],
+html[data-accent="amber"] .text-\[\#C4B5FD\],
+html[data-accent="amber"] .text-violet-400 {
+  color: #FBBF24 !important;
+}
+
+html[data-accent="amber"] .bg-\[\#8B5CF6\],
+html[data-accent="amber"] .bg-violet-600 {
+  background-color: #F59E0B !important;
+}
+
+html[data-accent="amber"] .hover\:bg-\[\#7C3AED\]:hover,
+html[data-accent="amber"] .hover\:bg-\[\#8B5CF6\]:hover {
+  background-color: #D97706 !important;
+}
+
+html[data-accent="amber"] .bg-\[\#8B5CF6\]\/08,
+html[data-accent="amber"] .bg-\[\#8B5CF6\]\/10,
+html[data-accent="amber"] .bg-\[\#8B5CF6\]\/15,
+html[data-accent="amber"] .bg-\[\#8B5CF6\]\/20,
+html[data-accent="amber"] .bg-\[\#8B5CF6\]\/25,
+html[data-accent="amber"] .bg-\[\#8B5CF6\]\/30 {
+  background-color: rgba(245, 158, 11, 0.16) !important;
+}
+
+html[data-accent="amber"] .border-\[\#8B5CF6\],
+html[data-accent="amber"] .border-\[\#8B5CF6\]\/20,
+html[data-accent="amber"] .border-\[\#8B5CF6\]\/30,
+html[data-accent="amber"] .border-\[\#8B5CF6\]\/40,
+html[data-accent="amber"] .border-\[\#8B5CF6\]\/50,
+html[data-accent="amber"] .border-\[\#8B5CF6\]\/60 {
+  border-color: rgba(245, 158, 11, 0.45) !important;
+}
+
+html[data-accent="amber"] .hover\:border-\[\#8B5CF6\]\/40:hover,
+html[data-accent="amber"] .hover\:border-\[\#8B5CF6\]\/50:hover,
+html[data-accent="amber"] .hover\:border-\[\#8B5CF6\]\/60:hover,
+html[data-accent="amber"] .hover\:border-\[\#8B5CF6\]:hover,
+html[data-accent="amber"] .group:hover .group-hover\:border-\[\#8B5CF6\]\/60,
+html[data-accent="amber"] .group\/stat:hover {
+  border-color: rgba(245, 158, 11, 0.55) !important;
+}
+
+html[data-accent="amber"] .from-\[\#8B5CF6\],
+html[data-accent="amber"] .from-\[\#A78BFA\] {
+  --tw-gradient-from: #F59E0B var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgba(245, 158, 11, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
+}
+
+html[data-accent="amber"] .via-\[\#7C3AED\],
+html[data-accent="amber"] .via-\[\#C084FC\],
+html[data-accent="amber"] .via-\[\#A78BFA\] {
+  --tw-gradient-to: rgba(217, 119, 6, 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #D97706 var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+html[data-accent="amber"] .to-\[\#8B5CF6\] {
+  --tw-gradient-to: #F59E0B var(--tw-gradient-to-position) !important;
+}
+
+html[data-accent="amber"] .from-\[\#8B5CF6\]\/20 {
+  --tw-gradient-from: rgba(245, 158, 11, 0.22) var(--tw-gradient-from-position) !important;
+}
+
+html[data-accent="amber"] .decoration-\[\#8B5CF6\]\/40 {
+  text-decoration-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+html[data-accent="amber"] #scrollProgressGradient stop:first-child { stop-color: #F59E0B; }
+html[data-accent="amber"] #scrollProgressGradient stop:last-child { stop-color: #FBBF24; }

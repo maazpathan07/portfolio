@@ -10,10 +10,13 @@ import {
   ShieldCheck,
   Calendar,
   Briefcase,
+  Palette,
 } from 'lucide-react';
 import { PROFILE } from '../../data/profile';
 import { PROJECTS } from '../../data/projects';
 import { SKILL_CATEGORIES } from '../../data/skills';
+import { useAccentTheme } from '../../context/ThemeContext';
+import { THEME_OPTIONS, type AccentTheme } from '../../types/theme';
 
 interface TerminalModalProps {
   isOpen: boolean;
@@ -27,6 +30,7 @@ interface CommandHistoryItem {
 }
 
 export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose }) => {
+  const { theme, setTheme } = useAccentTheme();
   const [inputVal, setInputVal] = useState('');
   const [history, setHistory] = useState<CommandHistoryItem[]>([]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -207,6 +211,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
               <div><span className="text-emerald-400 font-bold">contact</span> - Direct email & contact info</div>
               <div><span className="text-emerald-400 font-bold">socials</span> - GitHub, LinkedIn, Instagram links</div>
               <div><span className="text-emerald-400 font-bold">sudo hire-maaz</span> - 🏆 Hire command & executive dossier</div>
+              <div><span className="text-emerald-400 font-bold">theme &lt;color&gt;</span> - 🎨 Switch accent theme (violet/emerald/cyan/amber)</div>
               <div><span className="text-emerald-400 font-bold">clear</span> - Clear terminal history</div>
               <div><span className="text-emerald-400 font-bold">exit</span> - Close terminal window</div>
             </div>
@@ -413,7 +418,59 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
         );
         break;
 
+      case 'theme':
+      case 'themes':
+        outputNode = (
+          <div className="space-y-2 text-xs font-mono">
+            <p className="text-[#A78BFA] font-bold">ACCENT COLOR THEMES:</p>
+            <div className="space-y-1">
+              {THEME_OPTIONS.map((opt) => (
+                <div key={opt.id} className="flex items-center gap-2">
+                  <span>{opt.emoji}</span>
+                  <span className="text-white font-bold">{opt.id}</span>
+                  <span className="text-[#A1A1AA]">➔ {opt.name} ({opt.desc})</span>
+                  {theme === opt.id && (
+                    <span className="text-emerald-400 text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                      [ACTIVE]
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="text-[#71717A] text-[11px] pt-1">
+              Usage: <span className="text-emerald-400 font-bold">theme emerald</span> · <span className="text-cyan-400 font-bold">theme cyan</span> · <span className="text-amber-400 font-bold">theme amber</span> · <span className="text-[#A78BFA] font-bold">theme violet</span>
+            </p>
+          </div>
+        );
+        break;
+
       default:
+        if (trimmed.startsWith('theme ')) {
+          const requestedColor = trimmed.replace('theme ', '').trim() as AccentTheme;
+          if (['violet', 'emerald', 'cyan', 'amber'].includes(requestedColor)) {
+            setTheme(requestedColor);
+            const found = THEME_OPTIONS.find((t) => t.id === requestedColor);
+            outputNode = (
+              <div className="space-y-1 text-xs font-mono">
+                <p className="text-emerald-400 font-bold flex items-center gap-1.5">
+                  <Palette size={13} style={{ color: found?.color }} />
+                  <span>Accent theme switched to: {found?.emoji} {found?.name}</span>
+                </p>
+                <p className="text-[#A1A1AA] text-[11px]">
+                  All site accents, glows, buttons, and borders have updated dynamically.
+                </p>
+              </div>
+            );
+          } else {
+            outputNode = (
+              <p className="text-amber-400 text-xs font-mono">
+                Invalid theme color '{requestedColor}'. Available: <span className="text-white font-bold">violet, emerald, cyan, amber</span>.
+              </p>
+            );
+          }
+          break;
+        }
+
         outputNode = (
           <p className="text-rose-400 text-xs font-mono">
             zsh: command not found: <span className="text-white">{cmdText}</span>. Type <span className="text-emerald-400 font-bold">'help'</span> for list of commands.
