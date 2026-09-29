@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Terminal as TerminalIcon } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowUpRight, Terminal as TerminalIcon, Palette, Check } from 'lucide-react';
 import { NAV_LINKS } from '../../data/navigation';
 import { PROFILE } from '../../data/profile';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { MobileMenu } from './MobileMenu';
 import { TerminalModal } from '../ui/TerminalModal';
+import { useAccentTheme } from '../../context/ThemeContext';
+import { THEME_OPTIONS } from '../../types/theme';
 import profilePhoto from '../../assets/images/profile-portrait.jpg';
 
 export const Navbar: React.FC = () => {
+  const { theme, setTheme } = useAccentTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const themeMenuRef = useRef<HTMLDivElement>(null);
 
   const sectionIds = NAV_LINKS.map((link) => link.id);
   const activeId = useScrollSpy(sectionIds, 100);
@@ -33,6 +38,18 @@ export const Navbar: React.FC = () => {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (themeMenuRef.current && !themeMenuRef.current.contains(e.target as Node)) {
+        setIsThemeMenuOpen(false);
+      }
+    };
+    if (isThemeMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isThemeMenuOpen]);
 
   return (
     <>
@@ -105,6 +122,53 @@ export const Navbar: React.FC = () => {
 
           {/* Right Actions: Interactive Terminal & CTA */}
           <div className="flex items-center gap-2">
+            {/* Accent Theme Palette Selector Dropdown */}
+            <div ref={themeMenuRef} className="relative">
+              <button
+                onClick={() => setIsThemeMenuOpen((prev) => !prev)}
+                title="Change Accent Color Theme"
+                aria-label="Change Accent Color Theme"
+                className="inline-flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#141420]/90 hover:bg-[#1E1E30] text-[#A78BFA] hover:text-white border border-[#8B5CF6]/30 hover:border-[#8B5CF6] shadow-sm hover:shadow-[0_0_18px_rgba(139,92,246,0.35)] transition-all duration-200 active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+              >
+                <Palette size={14} className="text-[#8B5CF6] group-hover:scale-110 transition-transform" />
+              </button>
+
+              {/* Theme Dropdown Menu */}
+              {isThemeMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-48 p-2 rounded-2xl bg-[#12121A]/95 border border-white/10 backdrop-blur-2xl shadow-[0_16px_36px_rgba(0,0,0,0.6),0_0_24px_rgba(139,92,246,0.15)] z-50 animate-in fade-in zoom-in-95 duration-150 space-y-1">
+                  <div className="px-2 py-1 text-[10px] font-mono text-[#71717A] uppercase tracking-wider border-b border-white/[0.08]">
+                    Accent Theme
+                  </div>
+                  {THEME_OPTIONS.map((opt) => {
+                    const isSelected = theme === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        onClick={() => {
+                          setTheme(opt.id);
+                          setIsThemeMenuOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs transition-all ${
+                          isSelected
+                            ? 'bg-white/[0.08] text-white font-semibold'
+                            : 'text-[#D4D4D8] hover:bg-white/[0.04] hover:text-white'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span
+                            className="w-3.5 h-3.5 rounded-full shrink-0"
+                            style={{ backgroundColor: opt.color }}
+                          />
+                          <span>{opt.name}</span>
+                        </div>
+                        {isSelected && <Check size={12} className="text-white" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             {/* Interactive Terminal Button (maaz.sh) */}
             <button
               onClick={() => setIsTerminalOpen(true)}
