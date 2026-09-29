@@ -117,40 +117,52 @@ export const HeroSection: React.FC = () => {
               <SocialLinks iconSize={17} />
             </div>
 
-            {/* Micro-Proof Stat Badges (Modern Editorial Polish) */}
+            {/* Micro-Proof Stat Badges (Clickable Navigation Cards) */}
             <div
               className="grid grid-cols-3 gap-3 pt-2 w-full max-w-xl animate-hero-entrance [animation-delay:600ms] opacity-0"
               style={{ animationFillMode: 'forwards' }}
             >
-              {/* Stat 1 */}
-              <div className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] flex flex-col space-y-1">
+              {/* Stat 1 -> Projects Section */}
+              <a
+                href="#projects"
+                className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 flex flex-col space-y-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+                title="Jump to Projects"
+              >
                 <span className="text-base sm:text-lg font-bold text-[#F5F5F7] group-hover/stat:text-white flex items-center gap-1.5 transition-colors">
                   <CheckCircle2 size={15} className="text-[#8B5CF6]" /> 3+
                 </span>
                 <span className="text-xs font-medium text-[#A1A1AA] group-hover/stat:text-[#D4D4D8] transition-colors leading-tight">
                   Client Websites
                 </span>
-              </div>
+              </a>
 
-              {/* Stat 2 */}
-              <div className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] flex flex-col space-y-1">
+              {/* Stat 2 -> About Section */}
+              <a
+                href="#about"
+                className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 flex flex-col space-y-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+                title="Jump to About"
+              >
                 <span className="text-base sm:text-lg font-bold text-[#F5F5F7] group-hover/stat:text-white flex items-center gap-1.5 transition-colors">
                   <Code2 size={15} className="text-[#8B5CF6]" /> B.Tech
                 </span>
                 <span className="text-xs font-medium text-[#A1A1AA] group-hover/stat:text-[#D4D4D8] transition-colors leading-tight">
                   IT @ PPSU (25–28)
                 </span>
-              </div>
+              </a>
 
-              {/* Stat 3 */}
-              <div className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] flex flex-col space-y-1">
+              {/* Stat 3 -> Skills Section */}
+              <a
+                href="#skills"
+                className="group/stat p-3 rounded-2xl bg-[#12121B]/85 hover:bg-[#181826] border border-white/[0.08] hover:border-[#8B5CF6]/50 backdrop-blur-md transition-all duration-300 shadow-sm hover:shadow-[0_8px_20px_rgba(139,92,246,0.18)] hover:-translate-y-0.5 flex flex-col space-y-1 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+                title="Jump to Skills"
+              >
                 <span className="text-base sm:text-lg font-bold text-[#F5F5F7] group-hover/stat:text-white flex items-center gap-1.5 transition-colors">
                   <Layers size={15} className="text-[#8B5CF6]" /> Full-Stack
                 </span>
                 <span className="text-xs font-medium text-[#A1A1AA] group-hover/stat:text-[#D4D4D8] transition-colors leading-tight">
                   Java &amp; MERN Stack
                 </span>
-              </div>
+              </a>
             </div>
           </div>
 
