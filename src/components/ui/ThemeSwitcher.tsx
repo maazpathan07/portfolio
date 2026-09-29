@@ -36,7 +36,7 @@ export const ThemeSwitcher: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed bottom-6 left-6 z-40 select-none font-sans"
+      className="hidden sm:block fixed bottom-6 left-6 z-40 select-none font-sans"
     >
       {/* Expanded Theme Selection Popup */}
       <div
