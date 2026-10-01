@@ -12,6 +12,7 @@ import {
   Briefcase,
   GraduationCap,
   BookOpen,
+  FileDown,
 } from 'lucide-react';
 import { NAV_LINKS } from '../../data/navigation';
 import { PROFILE } from '../../data/profile';
@@ -177,22 +178,34 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           })}
         </nav>
 
-        {/* Footer Area with Live Clock, Action & Socials */}
+        {/* Footer Area with Live Clock, Actions & Socials */}
         <div className="pt-3.5 border-t border-white/[0.08] space-y-2.5">
           {/* Live Surat Clock & Status in Drawer */}
           <LiveStatusClock variant="compact" className="w-full justify-center text-[11px]" />
 
-          {/* Primary Action Button */}
-          <Button
-            href="#contact"
-            variant="primary"
-            size="md"
-            icon={Send}
-            className="w-full justify-center shadow-[0_0_20px_rgba(139,92,246,0.35)] text-xs py-2.5"
-            onClick={onClose}
-          >
-            Let's Talk
-          </Button>
+          {/* Action Buttons */}
+          <div className="grid grid-cols-2 gap-2">
+            <a
+              href={PROFILE.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-medium bg-[#1A1A28] border border-white/10 hover:border-[#8B5CF6]/50 text-[#F5F5F7] hover:text-white transition-all active:scale-[0.98]"
+            >
+              <FileDown size={14} className="text-[#8B5CF6]" />
+              Download CV
+            </a>
+
+            <Button
+              href="#contact"
+              variant="primary"
+              size="md"
+              icon={Send}
+              className="w-full justify-center shadow-[0_0_20px_rgba(139,92,246,0.35)] text-xs py-2.5"
+              onClick={onClose}
+            >
+              Let's Talk
+            </Button>
+          </div>
 
           {/* Social Links */}
           <div className="flex items-center justify-center pt-1">

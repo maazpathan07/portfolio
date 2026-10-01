@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Send, Terminal, Code2, Layers, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Send, Terminal, Code2, Layers, CheckCircle2, FileDown } from 'lucide-react';
 import { PROFILE } from '../../data/profile';
 import { Button } from '../ui/Button';
 import { PortraitFrame } from '../ui/PortraitFrame';
@@ -80,7 +80,7 @@ export const HeroSection: React.FC = () => {
 
             {/* CTA Action Buttons Group */}
             <div
-              className="flex flex-wrap items-center gap-3.5 pt-1 w-full sm:w-auto animate-hero-entrance [animation-delay:400ms] opacity-0"
+              className="flex flex-wrap items-center gap-3 pt-1 w-full sm:w-auto animate-hero-entrance [animation-delay:400ms] opacity-0"
               style={{ animationFillMode: 'forwards' }}
             >
               <Button
@@ -95,12 +95,25 @@ export const HeroSection: React.FC = () => {
               </Button>
 
               <Button
+                href={PROFILE.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="secondary"
+                size="lg"
+                icon={FileDown}
+                iconPosition="left"
+                className="w-full sm:w-auto border-[#8B5CF6]/30 hover:border-[#8B5CF6] hover:bg-[#1F1F2E] text-[#F5F5F7] shadow-sm hover:shadow-[0_0_20px_rgba(139,92,246,0.25)]"
+              >
+                Download CV
+              </Button>
+
+              <Button
                 href="#contact"
                 variant="secondary"
                 size="lg"
                 icon={Send}
                 iconPosition="left"
-                className="w-full sm:w-auto"
+                className="w-full sm:w-auto text-[#D4D4D8] hover:text-white"
               >
                 Get in Touch
               </Button>
