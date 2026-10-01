@@ -14,6 +14,7 @@ export const PROFILE = {
   ],
   location: 'Surat, Gujarat, India',
   email: 'pathanmaaz142@gmail.com',
+  resumeUrl: '/resume.pdf',
   availability: 'Open to Opportunities & Freelance Projects',
   stats: [
     { label: 'Client Websites Delivered', value: '3+' },

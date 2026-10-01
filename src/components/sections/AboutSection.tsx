@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe2, GraduationCap, Code2, Sparkles, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Globe2, GraduationCap, Code2, Sparkles, MapPin, CheckCircle2, ArrowRight, FileDown } from 'lucide-react';
 import { PROFILE } from '../../data/profile';
 import { SectionWrapper } from '../layout/SectionWrapper';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -133,9 +133,20 @@ export const AboutSection: React.FC = () => {
               Open to remote engineering opportunities, full-time roles, and international client projects.
             </p>
           </div>
-          <Button href="#contact" variant="outline" size="sm" icon={ArrowRight} iconPosition="right">
-            Let's Discuss
-          </Button>
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 shrink-0">
+            <a
+              href={PROFILE.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#8B5CF6]/15 hover:bg-[#8B5CF6] text-[#A78BFA] hover:text-white border border-[#8B5CF6]/30 hover:border-[#8B5CF6] text-xs font-semibold shadow-sm hover:shadow-[0_0_18px_rgba(139,92,246,0.35)] transition-all duration-200 active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]"
+            >
+              <FileDown size={13} className="text-[#8B5CF6] group-hover:text-white transition-colors" />
+              <span>Download CV</span>
+            </a>
+            <Button href="#contact" variant="outline" size="sm" icon={ArrowRight} iconPosition="right">
+              Let's Discuss
+            </Button>
+          </div>
         </div>
       </ScrollReveal>
     </SectionWrapper>

@@ -11,6 +11,7 @@ import {
   Calendar,
   Briefcase,
   Palette,
+  FileDown,
 } from 'lucide-react';
 import { PROFILE } from '../../data/profile';
 import { PROJECTS } from '../../data/projects';
@@ -203,6 +204,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
               <div><span className="text-emerald-400 font-bold">education</span> - B.Tech IT & Diploma qualifications</div>
               <div><span className="text-emerald-400 font-bold">contact</span> - Direct email & contact info</div>
               <div><span className="text-emerald-400 font-bold">socials</span> - GitHub, LinkedIn, Instagram links</div>
+              <div><span className="text-emerald-400 font-bold">resume / cv</span> - 📄 View & download official PDF resume</div>
               <div><span className="text-emerald-400 font-bold">sudo hire-maaz</span> - 🏆 Hire command & executive dossier</div>
               <div><span className="text-emerald-400 font-bold">theme &lt;color&gt;</span> - 🎨 Switch accent theme (violet/emerald/cyan/amber)</div>
               <div><span className="text-emerald-400 font-bold">clear</span> - Clear terminal history</div>
@@ -318,6 +320,37 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
                   <ExternalLink size={10} />
                 </a>
               ))}
+            </div>
+          </div>
+        );
+        break;
+
+      case 'resume':
+      case 'cv':
+        outputNode = (
+          <div className="p-3.5 rounded-2xl bg-[#141420] border border-[#8B5CF6]/30 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs font-bold text-white">
+                <FileDown size={14} className="text-[#8B5CF6]" />
+                <span>Maaz Pathan — Official Resume (PDF)</span>
+              </div>
+              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                VERIFIED PDF
+              </span>
+            </div>
+            <p className="text-xs text-[#A1A1AA] leading-relaxed">
+              B.Tech in Information Technology @ P P Savani University · Freelance Web Developer &amp; Aspiring Software Engineer.
+            </p>
+            <div className="pt-1 flex flex-wrap gap-2">
+              <a
+                href={PROFILE.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-1.5 rounded-xl bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-xs font-bold flex items-center gap-1.5 shadow-[0_0_15px_rgba(139,92,246,0.35)] transition-all active:scale-95"
+              >
+                <FileDown size={12} />
+                <span>Open / Download Resume PDF</span>
+              </a>
             </div>
           </div>
         );
