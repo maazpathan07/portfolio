@@ -80,19 +80,23 @@ export function useContactForm() {
 
     const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
-    // Handle development / unconfigured key mode gracefully
+    // Handle development / unconfigured key mode gracefully with direct mailto fallback
     if (!accessKey || accessKey === 'your_access_key_here') {
-      console.warn(
-        'Web3Forms access key not found in environment variables (VITE_WEB3FORMS_ACCESS_KEY). Running in mock preview mode.'
+      const subject = encodeURIComponent(
+        formData.subject.trim() || `Portfolio Contact from ${formData.fullName}`
       );
-      // Simulate network request in dev
-      setTimeout(() => {
-        setStatus('success');
-        setServerMessage(
-          'Message simulated successfully! (Note: Web3Forms access key is pending configuration in .env.local).'
-        );
-        setFormData(INITIAL_FORM_DATA);
-      }, 1000);
+      const body = encodeURIComponent(
+        `Name: ${formData.fullName}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+
+      // Open user's default email client
+      window.location.href = `mailto:pathanmaaz142@gmail.com?subject=${subject}&body=${body}`;
+
+      setStatus('success');
+      setServerMessage(
+        'Opening your email client to send directly to pathanmaaz142@gmail.com. You can also configure Web3Forms API key for direct in-browser delivery.'
+      );
+      setFormData(INITIAL_FORM_DATA);
       return;
     }
 
