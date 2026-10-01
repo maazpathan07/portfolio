@@ -69,9 +69,9 @@ export const AboutSection: React.FC = () => {
           {/* Pillar 1: Practical Delivery */}
           <ScrollReveal delay={150}>
             <div className="p-6 rounded-3xl bg-[#14141E]/90 border border-white/[0.08] hover:border-[#8B5CF6]/40 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.1)] group">
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="p-3 rounded-2xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/25 text-[#A78BFA] group-hover:scale-105 transition-transform">
-                  <Globe2 size={22} aria-hidden="true" />
+              <div className="flex items-center justify-between gap-4 mb-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/25 text-[#A78BFA] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <Globe2 size={20} aria-hidden="true" />
                 </div>
                 <Badge label="Production Proven" variant="violet" size="sm" />
               </div>
@@ -87,9 +87,9 @@ export const AboutSection: React.FC = () => {
           {/* Pillar 2: Academic Foundation */}
           <ScrollReveal delay={250}>
             <div className="p-6 rounded-3xl bg-[#14141E]/90 border border-white/[0.08] hover:border-[#8B5CF6]/40 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.1)] group">
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="p-3 rounded-2xl bg-white/[0.04] border border-white/10 text-[#F5F5F7] group-hover:scale-105 transition-transform">
-                  <GraduationCap size={22} aria-hidden="true" />
+              <div className="flex items-center justify-between gap-4 mb-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-white/[0.04] border border-white/10 text-[#F5F5F7] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <GraduationCap size={20} aria-hidden="true" />
                 </div>
                 <Badge label="Engineering Core" variant="zinc" size="sm" />
               </div>
@@ -105,9 +105,9 @@ export const AboutSection: React.FC = () => {
           {/* Pillar 3: Full-Stack Trajectory */}
           <ScrollReveal delay={350}>
             <div className="p-6 rounded-3xl bg-[#14141E]/90 border border-white/[0.08] hover:border-[#8B5CF6]/40 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.1)] group">
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <div className="p-3 rounded-2xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/25 text-[#A78BFA] group-hover:scale-105 transition-transform">
-                  <Code2 size={22} aria-hidden="true" />
+              <div className="flex items-center justify-between gap-4 mb-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/25 text-[#A78BFA] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <Code2 size={20} aria-hidden="true" />
                 </div>
                 <Badge label="Continuous Growth" variant="violet" size="sm" />
               </div>
