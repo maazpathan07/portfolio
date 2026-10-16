@@ -7,6 +7,7 @@ import {
   AlertCircle,
   MessageSquare,
   MessageCircle,
+  ArrowUpRight,
   Copy,
   Check
 } from 'lucide-react';
@@ -115,10 +116,10 @@ export const ContactSection: React.FC = () => {
                   href={PROFILE.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 px-3 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-semibold transition-all shadow-[0_0_12px_rgba(16,185,129,0.2)] active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-semibold transition-all shadow-[0_0_12px_rgba(16,185,129,0.2)] active:scale-95 group/wa"
                 >
                   <span>Chat</span>
-                  <span className="text-[11px]">↗</span>
+                  <ArrowUpRight size={13} className="shrink-0 transition-transform group-hover/wa:translate-x-0.5 group-hover/wa:-translate-y-0.5" />
                 </a>
               </div>
             </div>

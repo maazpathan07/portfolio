@@ -4,7 +4,8 @@ import {
   Sparkles,
   Layers,
   Zap,
-  GitPullRequest
+  GitPullRequest,
+  ArrowUpRight
 } from 'lucide-react';
 import { EXPERIENCES } from '../../data/experience';
 import { SectionWrapper } from '../layout/SectionWrapper';
@@ -123,25 +124,28 @@ export const ExperienceSection: React.FC = () => {
                   href="https://alif-perfumes.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs px-2.5 py-1 rounded-lg bg-[#171722] hover:bg-[#8B5CF6]/20 border border-white/10 hover:border-[#8B5CF6]/50 text-[#F5F5F7] transition-colors"
+                  className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-lg bg-[#171722] hover:bg-[#8B5CF6]/20 border border-white/10 hover:border-[#8B5CF6]/50 text-[#F5F5F7] transition-colors"
                 >
-                  Alif Perfume ↗
+                  <span>Alif Perfume</span>
+                  <ArrowUpRight size={11} className="text-[#A78BFA]" />
                 </a>
                 <a
                   href="https://wisteriatrust.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs px-2.5 py-1 rounded-lg bg-[#171722] hover:bg-[#8B5CF6]/20 border border-white/10 hover:border-[#8B5CF6]/50 text-[#F5F5F7] transition-colors"
+                  className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-lg bg-[#171722] hover:bg-[#8B5CF6]/20 border border-white/10 hover:border-[#8B5CF6]/50 text-[#F5F5F7] transition-colors"
                 >
-                  Wisteria Trust ↗
+                  <span>Wisteria Trust</span>
+                  <ArrowUpRight size={11} className="text-[#A78BFA]" />
                 </a>
                 <a
                   href="https://national-auto-garage.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs px-2.5 py-1 rounded-lg bg-[#171722] hover:bg-[#8B5CF6]/20 border border-white/10 hover:border-[#8B5CF6]/50 text-[#F5F5F7] transition-colors"
+                  className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-lg bg-[#171722] hover:bg-[#8B5CF6]/20 border border-white/10 hover:border-[#8B5CF6]/50 text-[#F5F5F7] transition-colors"
                 >
-                  National Auto Garage ↗
+                  <span>National Auto Garage</span>
+                  <ArrowUpRight size={11} className="text-[#A78BFA]" />
                 </a>
               </div>
 
