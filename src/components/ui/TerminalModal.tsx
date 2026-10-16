@@ -203,6 +203,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
               <div><span className="text-emerald-400 font-bold">experience</span> - Freelance client delivery history</div>
               <div><span className="text-emerald-400 font-bold">education</span> - B.Tech IT & Diploma qualifications</div>
               <div><span className="text-emerald-400 font-bold">contact</span> - Direct email & contact info</div>
+              <div><span className="text-emerald-400 font-bold">whatsapp</span> - 💬 Chat directly on WhatsApp</div>
               <div><span className="text-emerald-400 font-bold">socials</span> - GitHub, LinkedIn, Instagram links</div>
               <div><span className="text-emerald-400 font-bold">resume / cv</span> - 📄 View & download official PDF resume</div>
               <div><span className="text-emerald-400 font-bold">sudo hire-maaz</span> - 🏆 Hire command & executive dossier</div>
@@ -296,9 +297,35 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
         outputNode = (
           <div className="space-y-1.5 text-xs text-[#D4D4D8]">
             <p className="text-[#A78BFA] font-bold">DIRECT CONTACT INFO:</p>
-            <p>📧 Email: <a href={`mailto:${PROFILE.email}`} className="text-emerald-400 underline">{PROFILE.email}</a></p>
+            <p>💬 WhatsApp: <a href={PROFILE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline">{PROFILE.phone}</a></p>
+            <p>📧 Email: <a href={`mailto:${PROFILE.email}`} className="text-[#A78BFA] underline">{PROFILE.email}</a></p>
             <p>📍 Location: <span className="text-white">{PROFILE.location}</span></p>
             <p>⚡ Status: <span className="text-emerald-400">{PROFILE.availability}</span></p>
+          </div>
+        );
+        break;
+
+      case 'whatsapp':
+        outputNode = (
+          <div className="p-3 rounded-2xl bg-[#141420] border border-emerald-500/30 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-emerald-400">WhatsApp Chat</span>
+              <span className="text-[10px] font-mono text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                ACTIVE
+              </span>
+            </div>
+            <p className="text-xs text-[#A1A1AA]">
+              Send a direct message on WhatsApp: <span className="text-white font-mono">{PROFILE.phone}</span>
+            </p>
+            <a
+              href={PROFILE.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.35)] active:scale-95"
+            >
+              <span>Open WhatsApp Chat</span>
+              <ExternalLink size={11} />
+            </a>
           </div>
         );
         break;
@@ -660,7 +687,7 @@ export const TerminalModal: React.FC<TerminalModalProps> = ({ isOpen, onClose })
         <div className="bg-[#0F0F1A] px-4 py-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
             <span className="text-[#71717A] text-[10px]">Quick:</span>
-            {['help', 'skills', 'projects', 'sudo hire-maaz', 'contact', 'clear'].map((cmd) => (
+            {['help', 'skills', 'projects', 'whatsapp', 'sudo hire-maaz', 'contact', 'clear'].map((cmd) => (
               <button
                 key={cmd}
                 onClick={() => {

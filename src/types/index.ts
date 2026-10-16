@@ -66,7 +66,7 @@ export interface LearningItem {
 export interface SocialLinkItem {
   name: string;
   url: string;
-  iconName: 'github' | 'linkedin' | 'instagram' | 'mail';
+  iconName: 'github' | 'linkedin' | 'instagram' | 'mail' | 'whatsapp';
   ariaLabel: string;
 }
 

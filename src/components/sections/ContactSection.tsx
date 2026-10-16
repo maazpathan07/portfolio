@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   AlertCircle,
   MessageSquare,
+  MessageCircle,
   Copy,
   Check
 } from 'lucide-react';
@@ -24,12 +25,19 @@ export const ContactSection: React.FC = () => {
     useContactForm();
 
   const [copied, setCopied] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const isSubmitting = status === 'submitting';
 
   const copyEmail = () => {
     navigator.clipboard.writeText(PROFILE.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const copyPhone = () => {
+    navigator.clipboard.writeText(PROFILE.phone);
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   return (
@@ -48,9 +56,9 @@ export const ContactSection: React.FC = () => {
         ========================================================================= */}
         <ScrollReveal
           delay={100}
-          className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-[#13131D]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl space-y-6"
+          className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-[#13131D]/95 border border-white/[0.08] backdrop-blur-xl shadow-2xl space-y-5"
         >
-          <div className="space-y-3.5">
+          <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Badge label="Available for Hire" variant="violet" size="sm" dot />
             </div>
@@ -64,38 +72,90 @@ export const ContactSection: React.FC = () => {
             </p>
           </div>
 
-          {/* Primary Email Card with Quick Copy Action */}
-          <div className="p-3.5 sm:p-4 rounded-2xl bg-[#0D0D14] border border-white/[0.06] space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-[#A78BFA] uppercase tracking-wider">
-                Direct Email
-              </span>
-              <button
-                onClick={copyEmail}
-                className="flex items-center gap-1 text-[11px] font-mono text-[#A1A1AA] hover:text-white transition-colors"
-                title="Copy email address"
-              >
-                {copied ? (
-                  <>
-                    <Check size={12} className="text-emerald-400" />
-                    <span className="text-emerald-400">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy size={12} />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
+          {/* Quick Communication Cards: WhatsApp & Email */}
+          <div className="space-y-2.5">
+            {/* Direct WhatsApp Card */}
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0D0D14] border border-emerald-500/25 hover:border-emerald-500/50 transition-all space-y-2 group shadow-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider flex items-center gap-1.5 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  WhatsApp Direct
+                </span>
+                <button
+                  onClick={copyPhone}
+                  className="flex items-center gap-1 text-[11px] font-mono text-[#A1A1AA] hover:text-white transition-colors"
+                  title="Copy WhatsApp number"
+                >
+                  {copiedPhone ? (
+                    <>
+                      <Check size={12} className="text-emerald-400" />
+                      <span className="text-emerald-400">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={12} />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <div className="flex items-center justify-between gap-2">
+                <a
+                  href={PROFILE.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#F5F5F7] hover:text-emerald-400 transition-colors"
+                >
+                  <MessageCircle size={15} className="text-emerald-400 shrink-0" aria-hidden="true" />
+                  <span className="tracking-wide">{PROFILE.phone}</span>
+                </a>
+
+                <a
+                  href={PROFILE.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-3 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-semibold transition-all shadow-[0_0_12px_rgba(16,185,129,0.2)] active:scale-95"
+                >
+                  <span>Chat</span>
+                  <span className="text-[11px]">↗</span>
+                </a>
+              </div>
             </div>
 
-            <a
-              href={`mailto:${PROFILE.email}`}
-              className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#F5F5F7] hover:text-[#8B5CF6] transition-colors break-all"
-            >
-              <Mail size={15} className="text-[#8B5CF6] shrink-0" aria-hidden="true" />
-              <span>{PROFILE.email}</span>
-            </a>
+            {/* Primary Email Card with Quick Copy Action */}
+            <div className="p-3 sm:p-3.5 rounded-2xl bg-[#0D0D14] border border-white/[0.06] space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono text-[#A78BFA] uppercase tracking-wider">
+                  Direct Email
+                </span>
+                <button
+                  onClick={copyEmail}
+                  className="flex items-center gap-1 text-[11px] font-mono text-[#A1A1AA] hover:text-white transition-colors"
+                  title="Copy email address"
+                >
+                  {copied ? (
+                    <>
+                      <Check size={12} className="text-emerald-400" />
+                      <span className="text-emerald-400">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={12} />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <a
+                href={`mailto:${PROFILE.email}`}
+                className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#F5F5F7] hover:text-[#8B5CF6] transition-colors break-all"
+              >
+                <Mail size={15} className="text-[#8B5CF6] shrink-0" aria-hidden="true" />
+                <span>{PROFILE.email}</span>
+              </a>
+            </div>
           </div>
 
           {/* 🕒 Live Real-Time Surat Clock & Dynamic Activity Status */}

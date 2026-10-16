@@ -14,6 +14,8 @@ export const PROFILE = {
   ],
   location: 'Surat, Gujarat, India',
   email: 'pathanmaaz142@gmail.com',
+  phone: '+91 8160991036',
+  whatsappUrl: 'https://wa.me/918160991036?text=Hi%20Maaz,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!',
   resumeUrl: '/resume.pdf',
   availability: 'Open to Opportunities & Freelance Projects',
   stats: [
@@ -39,6 +41,12 @@ export const PROFILE = {
       url: 'https://www.instagram.com/p__maaz/',
       iconName: 'instagram',
       ariaLabel: "View Maaz Pathan's Instagram profile",
+    },
+    {
+      name: 'WhatsApp',
+      url: 'https://wa.me/918160991036?text=Hi%20Maaz,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!',
+      iconName: 'whatsapp',
+      ariaLabel: 'Message Maaz Pathan on WhatsApp',
     },
     {
       name: 'Email',
