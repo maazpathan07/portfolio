@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, MapPin, Code2 } from 'lucide-react';
+import { ArrowUp, MapPin } from 'lucide-react';
 import { PROFILE } from '../../data/profile';
 import { NAV_LINKS } from '../../data/navigation';
 import { SocialLinks } from '../ui/SocialLinks';
@@ -106,13 +106,9 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Attribution */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#71717A] text-center sm:text-left">
+        {/* Bottom Bar: Copyright */}
+        <div className="pt-8 text-xs text-[#71717A] text-center sm:text-left">
           <p>© {CURRENT_YEAR} {PROFILE.shortName}. All rights reserved.</p>
-          <p className="flex items-center justify-center gap-1.5 text-xs text-[#A1A1AA]">
-            <Code2 size={13} className="text-[#8B5CF6]" />
-            <span>React · TypeScript · Tailwind CSS</span>
-          </p>
         </div>
       </div>
     </footer>
